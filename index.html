@@ -5,264 +5,467 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#161816">
 <meta name="description" content="Flip-Cargo E+ 折疊電輔貨運自行車：載童、載寵物、載物，到站收折。大葉大學機械與自動化工程學系產品概念。">
-<title>Flip-Cargo E+｜一折即行</title>
-<link rel="icon" href="data:,">
+<title>一折即行｜Flip-Cargo E+</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script>
+(() => {
+  let saved = null, seen = null;
+  try { saved = localStorage.getItem('fx'); seen = sessionStorage.getItem('intro') } catch {}
+  const fx = saved ? saved === 'on' : !matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const c = document.documentElement.classList;
+  c.add('js');
+  if (fx) c.add('fx');
+  if (fx && !seen && !location.hash) c.add('booting');
+})();
+</script>
 <style>
-:root{
-  --cream:#fff6e8; --blush:#eadcd2; --sand:#d8c3a9; --rust:#a23b08; --cocoa:#642704; --ink:#2b211c; --muted:#69594e;
-  --kai:"DFKai-SB","標楷體","BiauKai","Kaiti TC",serif;
-  --sans:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
-  --gut:max(20px,calc((100vw - 1200px)/2));
-}
+:root{--night:#161816;--ink:#232723;--paper:#f6f3ef;--tan:#cdb9a9;--mist:#e8ded5;--hot:#ff6a00;--deep:#a84300;--muted:#625a53;--sans:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;--num:"Bahnschrift","DIN Alternate","Roboto Condensed","Arial",sans-serif;--gut:max(20px,calc((100vw - 1220px)/2));--head:72px;--cut:20px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:64px;background:var(--cream)}
-body{margin:0;color:var(--ink);font:17px/1.75 var(--sans);line-break:strict}
+html{scroll-padding-top:var(--head);background:var(--paper);overflow-x:clip}
+html.fx{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:17px/1.75 var(--sans);line-break:strict;overflow-x:clip}
 img{display:block;max-width:100%}
 a{color:inherit;text-underline-offset:4px}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
 h1,h2,h3,p,figure,dl,dd{margin:0}
-h1,h2,h3{font-family:var(--kai);font-weight:400;text-wrap:balance}
-h2{font-size:clamp(34px,4.4vw,60px);line-height:1.25}
-h3{font-size:28px;line-height:1.4}
+h2,h3{font-weight:900}
+h2{font-size:clamp(34px,5vw,72px);line-height:1.2;text-wrap:balance}
+h3{font-size:26px;line-height:1.4}
+:focus-visible{outline:3px solid var(--hot);outline-offset:4px}
 .phrase{display:inline-block}
-.wrap{padding:96px var(--gut)}
-.intro{display:flex;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:40px;flex-wrap:wrap}
-.intro p{max-width:34em;color:var(--muted)}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.wrap{padding:120px var(--gut)}
+.intro{display:flex;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:52px;flex-wrap:wrap}
+.intro p{max-width:30em;color:var(--muted)}
 .note{font-size:14px;line-height:1.65;color:var(--muted)}
 
-.top{position:sticky;top:0;z-index:5;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--gut);background:var(--cream)}
-.brand{font-weight:700;text-decoration:none;white-space:nowrap}
-.top nav{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;font-size:15px}
-.top nav a{text-decoration:none;padding:10px 0}
-.top nav a:hover{color:var(--rust)}
+/* LOGO：各零件可獨立動作 */
+.logo{display:block;overflow:visible}
+.logo .p{transform-box:fill-box;transform-origin:center}
+.lockup{width:min(520px,76vw);color:var(--paper)}
+.lockup .logo{width:100%;height:auto}
+.lockup .w{margin-top:4%}
+.booting .hero:not(.play) .p{visibility:hidden}
+.fx .play .p{animation:.8s cubic-bezier(.16,1,.3,1) both}
+.fx .play .road{animation-name:draw;animation-delay:.05s}
+.fx .play .rear{animation-name:roll;animation-duration:1.2s}
+.fx .play .arm{animation-name:from-left;animation-delay:.45s}
+.fx .play .post{animation-name:rise;animation-delay:.55s}
+.fx .play .saddle{animation-name:drop;animation-delay:.75s}
+.fx .play .frame{animation-name:from-right;animation-delay:.3s}
+.fx .play .handle{animation-name:drop;animation-delay:.85s}
+.fx .play .box{animation-name:pop;animation-delay:.8s}
+.fx .play .hinge{animation-name:lock;animation-delay:1.05s}
+.fx .play .s1{animation-name:dash;animation-delay:1.2s}
+.fx .play .s2{animation-name:dash;animation-delay:1.3s}
+.fx .play .c1{animation-name:draw;animation-delay:1.05s}
+.fx .play .c2{animation-name:hinge-in;animation-delay:1.2s;transform-origin:left}
+.fx .play .c3{animation-name:rise;animation-delay:1.35s}
+.fx .play .c4{animation-name:from-right;animation-delay:1.5s}
+@keyframes draw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes roll{from{opacity:0;transform:translateX(-420px) rotate(-300deg)}}
+@keyframes from-left{from{opacity:0;transform:translateX(-180px)}}
+@keyframes from-right{from{opacity:0;transform:translateX(300px) skewX(-18deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(120px)}}
+@keyframes drop{from{opacity:0;transform:translateY(-170px)}}
+@keyframes pop{from{opacity:0;transform:scale(.2)}}
+@keyframes lock{from{opacity:0;transform:scale(4)}}
+@keyframes dash{from{opacity:0;transform:translateX(-160px) scaleX(.1)}}
+@keyframes hinge-in{from{opacity:0;transform:perspective(600px) rotateY(95deg)}}
 
-.hero{position:relative;height:min(780px,calc(100svh - 64px));min-height:540px;display:grid;grid-template-columns:40% 60%;grid-template-rows:minmax(0,1fr);background:var(--cocoa);color:var(--cream);overflow:hidden}
-.hero .copy{align-self:center;padding:32px 32px 32px var(--gut)}
-.hero h1{font-size:clamp(76px,9.6vw,150px);line-height:1.08}
-.hero .name{font-size:22px;font-weight:700;margin-bottom:20px}
-.hero .lead{font-family:var(--kai);font-size:clamp(21px,2vw,30px);line-height:1.55;margin:24px 0 28px}
-.hero .photo{min-height:0}
-.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:60% 78%}
-.cta{display:inline-block;padding:11px 26px;background:var(--cream);color:var(--cocoa);text-decoration:none;font-weight:700}
-.hero small{display:block;margin-top:22px;font-size:13px;color:var(--sand)}
+/* 開場 */
+.boot{display:none}
+.booting .boot{position:fixed;z-index:30;inset:0;display:grid;place-content:center;background:var(--night);animation:boot-out .9s cubic-bezier(.8,0,.2,1) 2.4s both;cursor:pointer}
+.boot p{position:absolute;left:0;right:0;bottom:32px;text-align:center;color:var(--tan);font-size:13px}
+@keyframes boot-out{from{clip-path:polygon(0 0,130% 0,118% 100%,0 100%);visibility:visible}to{clip-path:polygon(130% 0,130% 0,118% 100%,118% 100%);visibility:hidden}}
 
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:30px var(--gut);background:var(--blush)}
-.facts dd{font:38px/1.2 var(--kai);white-space:nowrap}
-.facts dt{font-size:14px;color:var(--muted)}
-.facts p{grid-column:1/-1}
+/* 頁首 */
+.top{position:fixed;inset:0 0 auto;z-index:20;height:var(--head);display:flex;align-items:center;gap:30px;padding:0 var(--gut);color:var(--paper);background:var(--night)}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;text-decoration:none;flex:none}
+.b-mark{width:66px;height:39px}.b-word{width:101px;height:24px}
+.top nav{display:flex;gap:26px;font-size:15px;white-space:nowrap}
+.top nav a{position:relative;text-decoration:none;padding:10px 0}
+.top nav a::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:4px;background:var(--hot);transform:skewX(-30deg) scaleX(0);transform-origin:left;transition:transform .3s}
+.top nav a:hover::after,.top nav a[aria-current]::after{transform:skewX(-30deg) scaleX(1)}
+.fx-switch,.menu{display:none;align-items:center;gap:9px;min-height:40px;padding:0;border:0;background:none;font-size:14px;white-space:nowrap}
+.js .fx-switch{display:flex}
+.fx-switch i{position:relative;width:32px;height:16px;background:#55514d;transform:skewX(-22deg)}
+.fx-switch i::after{content:"";position:absolute;inset:3px 19px 3px 3px;background:var(--paper);transition:transform .25s}
+.fx-switch[aria-pressed=true] i{background:var(--hot)}
+.fx-switch[aria-pressed=true] i::after{transform:translateX(16px)}
+.progress{position:absolute;left:0;right:0;bottom:-3px;height:3px;pointer-events:none}
+.progress::before{content:"";position:absolute;inset:0;background:var(--hot);transform-origin:left;transform:scaleX(var(--p,0))}
+.progress svg{position:absolute;bottom:0;left:0;width:34px;height:20px;transform:translateX(calc(var(--p,0)*(100vw - 34px)));opacity:0}
+.fx .progress svg{opacity:1}
+
+/* 主視覺：捲動時 LOGO 收折 */
+.hero{background:var(--night);color:var(--paper)}
+.fx .hero{height:190vh}
+.hero-pin{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,43%) minmax(0,57%);align-items:center;padding:var(--head) var(--gut) 0;overflow:hidden;isolation:isolate}
+.fx .hero-pin{position:sticky;top:0}
+#speed{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:none}
+.fx #speed{display:block}
+.horizon{position:absolute;z-index:-1;left:-20%;right:-20%;bottom:-2px;height:22%;background:repeating-linear-gradient(90deg,#ff6a0030 0 2px,transparent 2px 90px);transform:perspective(260px) rotateX(62deg);transform-origin:bottom;-webkit-mask:linear-gradient(transparent,#000);mask:linear-gradient(transparent,#000)}
+.fx .horizon{animation:road 1.1s linear infinite}
+@keyframes road{to{background-position:-90px 0}}
+.hero .name{font:700 24px/1.4 var(--num);color:var(--hot);margin-bottom:18px}
+.sig{width:min(100%,540px)}
+.sig .logo{width:100%;height:auto}
+.hero .lead{font-size:clamp(19px,1.8vw,27px);line-height:1.6;margin:28px 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 28px;border:0;background:var(--hot);color:var(--night);font-weight:900;text-decoration:none;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);transition:translate .2s ease-out,background .2s}
+.btn:hover{background:var(--paper)}
+.btn.line{display:none;background:#343832;color:var(--paper)}
+.js .btn.line{display:inline-block}
+.btn.line:hover{background:var(--tan);color:var(--night)}
+.hero small{display:block;margin-top:22px;color:var(--tan);font-size:13px}
+.emblem{perspective:900px;padding-left:4%}
+.emblem .logo{width:100%;height:auto;cursor:pointer;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out}
+.fx .emblem .hinge{filter:drop-shadow(0 0 10px #ff6a0090)}
+
+/* 產品照展開 */
+.reveal{background:var(--mist)}
+.fx .reveal{height:210vh}
+.reveal-pin{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center;gap:40px;padding:calc(var(--head) + 24px) var(--gut) 32px 0;min-height:100vh;overflow:hidden}
+.fx .reveal-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:0}
+.reveal figure{justify-self:center;width:min(100%,1086px,calc((100vh - 130px)*1.3084));aspect-ratio:1086/830;overflow:hidden}
+.reveal figure img{width:100%;height:100%;object-fit:cover}
+.fx .reveal figure{clip-path:polygon(var(--a,0%) 0,100% 0,var(--b,100%) 100%,0 100%)}
+.fx .reveal figure img{transform:scale(var(--z,1))}
+.reveal h2{font-size:clamp(30px,3.8vw,56px)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:34px 0 18px}
+.facts dd,.material dd,.price{font-family:var(--num);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.facts dd{font-size:clamp(25px,2.6vw,38px);line-height:1.25}
+.facts dt,.material dt{font-size:13px;color:var(--muted)}
+.fx .facts>div{transition:opacity .5s,transform .5s}
+.fx .facts>div.off{opacity:0;transform:translateY(22px) skewX(-8deg)}
 
 .problem{display:grid;grid-template-columns:1.1fr 1fr;gap:40px 72px;align-items:center}
 .problem p+p{margin-top:18px}
-.problem strong{color:var(--rust)}
+strong{color:var(--deep)}
+.ch{display:inline-block}
+.fx [data-split] .ch{transition:opacity .5s,transform .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i)*35ms);transform-origin:left bottom}
+.fx [data-split]:not(.in) .ch{opacity:0;transform:perspective(300px) rotateY(80deg) translateY(16px)}
 
-.modes{background:var(--blush)}
-.mode-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:center}
-.stage{position:relative;aspect-ratio:4/3;overflow:hidden}
-.stage img{position:absolute;max-width:none;transition:width .9s ease,left .9s ease,top .9s ease}
-.switch button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #bda48f;background:none;padding:20px 12px}
-.switch button span{display:block;font:30px/1.4 var(--kai)}
-.switch button small{font-size:15px;color:var(--muted)}
-.switch button[aria-pressed=true]{background:var(--cocoa);color:var(--cream)}
-.switch button[aria-pressed=true] small{color:var(--sand)}
-.switch .note{padding:14px 12px 0}
+/* 交叉跑馬帶 */
+.belts{position:relative;height:210px;overflow:hidden}
+.belt{position:absolute;left:-3%;width:106%;overflow:hidden;padding:9px 0;white-space:nowrap;font-size:30px;font-weight:900}
+.belt.a{top:70px;background:var(--hot);transform:rotate(-2.2deg);z-index:1}
+.belt.b{top:76px;background:var(--night);color:var(--paper);transform:rotate(2.2deg)}
+.belt>div{display:flex;width:max-content;will-change:transform}
+.belt span{display:flex;align-items:center;gap:34px;padding-right:34px}
+.belt svg{width:58px;height:35px}
+.belt.a svg{color:var(--night)}
 
-.cabins{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.cabins img{width:100%;aspect-ratio:1;object-fit:cover}
-.cabins h3{margin:16px 0 4px}
-.sight{position:relative}
-.sight img{width:100%;min-height:190px;object-fit:cover}
-.sight p{padding:26px var(--gut);background:var(--ink);color:var(--cream);font:clamp(24px,2.8vw,38px)/1.45 var(--kai);text-align:center}
+/* 三態 */
+.modes{background:var(--night);color:var(--paper)}
+.fx .modes{height:320vh}
+.modes-pin{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:center;gap:36px 56px;min-height:100vh;padding:calc(var(--head) + 28px) var(--gut) 28px}
+.fx .modes-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:0;overflow:hidden}
+.modes .note{color:var(--tan);margin-top:14px}
+.mode-lead{margin-top:14px;font-size:15px;color:var(--tan)}
+.switch{margin-top:22px}
+.switch button{position:relative;display:block;width:100%;text-align:left;border:0;background:none;padding:13px 30px;transition:color .3s;isolation:isolate}
+.switch button::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--hot);clip-path:polygon(var(--cut) 0,100% 0,calc(100% - var(--cut)) 100%,0 100%);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.switch button[aria-pressed=true]{color:var(--night)}
+.switch button[aria-pressed=true]::before{transform:scaleX(1)}
+.switch span{display:block;font-size:28px;font-weight:900;line-height:1.5}
+.switch small{display:block;font-size:14px;line-height:1.55}
+.stage{position:relative;justify-self:center;width:min(100%,calc((100vh - 130px)*1.3333));aspect-ratio:4/3;overflow:hidden;perspective:1100px;background:var(--mist)}
+.stage>img,.slat img{position:absolute;max-width:none}
+.slat{position:absolute;top:0;height:100%;width:calc(100%/6 + 1px);overflow:hidden;backface-visibility:hidden}
+.slat::after{content:"";position:absolute;inset:0;background:#000;opacity:var(--shade,0)}
 
-.days{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
-.day{position:relative;grid-column:span 2;height:350px;overflow:hidden;background:var(--cocoa);color:#fff}
-.day.wide{grid-column:span 3}
+/* 前艙 */
+.cabins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;perspective:1200px}
+.shot{position:relative;overflow:hidden;clip-path:polygon(28px 0,100% 0,100% calc(100% - 28px),calc(100% - 28px) 100%,0 100%,0 28px)}
+.shot img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .6s}
+.shot::after{content:"";position:absolute;inset:0;opacity:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),#ffd9b870,transparent 48%);transition:opacity .3s;pointer-events:none}
+.fx .tilt:hover .shot::after{opacity:1}
+.fx .tilt:hover img{transform:scale(1.06)}
+.cabins h3{margin:18px 0 4px}
+.fx .unfold{transform-origin:left center;transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .7s;transition-delay:calc(var(--i,0)*140ms)}
+.fx .unfold:not(.in){opacity:0;transform:rotateY(76deg)}
+.fx .unfold.ready{transition:transform .18s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-origin:center}
+
+.sight{background:var(--night);color:var(--paper);padding-top:90px;overflow:hidden}
+.sight p{font-size:clamp(34px,7vw,108px);font-weight:900;line-height:1.2;padding:0 var(--gut) 50px}
+.sight p span{display:block;width:max-content;max-width:100%}
+.sight p span+span{margin-left:auto;color:var(--hot)}
+.fx .sight p span{transform:translateX(var(--x,0))}
+.sight-img img{width:100%;min-height:190px;object-fit:cover}
+
+/* 橫向情境 */
+.scenes{position:relative}
+.scenes-pin{padding:calc(var(--head) + 36px) 0 60px}
+.scenes .intro{padding:0 var(--gut);margin-bottom:30px}
+.scenes h2{font-size:clamp(32px,4vw,56px)}
+.track{display:flex;gap:18px;padding:0 var(--gut);scroll-padding-inline:var(--gut);overflow-x:auto;scroll-snap-type:x mandatory}
+.day{position:relative;flex:0 0 min(560px,78vw);height:min(440px,62vh);overflow:hidden;background:#4a4036;color:#fff;scroll-snap-align:start}
 .day img{width:100%;height:100%;object-fit:cover}
 .day img.failed{visibility:hidden}
-.day figcaption{position:absolute;left:0;right:0;bottom:0;padding:12px 18px 15px;background:rgb(43 33 28/.86);font-size:15px;line-height:1.55}
-.day b{display:block;font:400 27px/1.4 var(--kai)}
+.day figcaption{position:absolute;left:0;bottom:0;max-width:100%;padding:12px 44px 14px 20px;background:#161816eb;font-size:15px;line-height:1.55;clip-path:polygon(0 0,100% 0,calc(100% - 26px) 100%,0 100%)}
+.day b{display:block;font-size:25px;font-weight:900}
+.track-line{display:none;height:4px;margin:24px var(--gut) 0;background:var(--mist)}
+.track-line i{display:block;height:100%;background:var(--hot);transform:scaleX(var(--t,0));transform-origin:left}
+.scenes.pinned .scenes-pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:var(--head) 0 0;overflow:hidden}
+.scenes.pinned .track{overflow:visible;width:max-content;scroll-snap-type:none;will-change:transform}
+.scenes.pinned .track-line{display:block}
 
-.power{background:var(--cocoa);color:var(--cream)}
-.power .intro p,.power .note{color:var(--sand)}
-.battery{display:grid;grid-template-columns:1fr 1fr;gap:48px 72px}
-.choice{display:flex;gap:10px;flex-wrap:wrap}
-.choice button{border:1px solid var(--sand);background:none;color:var(--cream);padding:9px 20px}
-.choice button[aria-pressed=true]{background:var(--cream);color:var(--cocoa)}
-.range{font:clamp(70px,8vw,120px)/1.1 var(--kai);margin:26px 0 8px;white-space:nowrap}
-.range small{font-size:.35em;margin-left:10px}
-.bar{height:22px;background:#82451f;margin:16px 0 8px}
-.bar i{display:block;height:100%;background:var(--sand);transition:width .6s ease}
-.battery li{padding:11px 0;border-bottom:1px solid #82451f}
-.battery ul{list-style:none;margin:0;padding:0}
-.battery li{display:grid;grid-template-columns:6em minmax(0,1fr)}
+/* 電池 */
+.power{background:var(--night);color:var(--paper)}
+.power .intro p,.power .note{color:var(--tan)}
+.battery{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:44px 64px;align-items:center}
+.dial{position:relative}
+.arc{width:100%;height:auto;overflow:visible}
+.arc path{fill:none;stroke-width:24}
+.arc-bg{stroke:#343832}
+.arc-val{stroke:var(--hot);stroke-dasharray:100 200;stroke-dashoffset:50}
+.fx .arc-val{transition:stroke-dashoffset 1.2s cubic-bezier(.6,0,.2,1)}
+.rider{transform-origin:260px 280px;transform:rotate(90deg)}
+.fx .rider{transition:transform 1.2s cubic-bezier(.6,0,.2,1)}
+.range{position:absolute;left:0;right:0;bottom:1%;text-align:center;font:700 clamp(46px,6.5vw,100px)/1 var(--num);white-space:nowrap;font-variant-numeric:tabular-nums}
+.range small{display:block;font-size:.3em;color:var(--tan);margin-top:8px}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{border:0;background:#343832;padding:10px 26px;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:background .3s,color .3s}
+.choice button[aria-pressed=true]{background:var(--hot);color:var(--night);font-weight:900}
+.detail{margin:18px 0 12px}
+.battery ul{list-style:none;margin:0 0 16px;padding:0}
+.battery li{display:grid;grid-template-columns:6em minmax(0,1fr);padding:8px 0;border-bottom:1px solid #343832;font-size:15px}
 
-.build{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;align-items:center}
+/* 藍圖掃描 */
+.blueprint{background:var(--mist)}
+.build{display:grid;grid-template-columns:1.1fr 1fr;gap:40px 72px;align-items:center}
 .build p{margin-top:18px}
+.scan{position:relative;overflow:hidden}
+.scan i{position:absolute;top:0;bottom:0;width:3px;left:var(--scan,100%);background:var(--hot);box-shadow:0 0 18px 4px #ff6a0070;opacity:0}
+.fx .scan i{opacity:var(--on,0)}
+.fx .scan img{clip-path:inset(0 calc(100% - var(--scan,100%)) 0 0)}
 .material{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 10px}
-.material dd{font:30px/1.3 var(--kai);color:var(--rust)}
-.material dt{font-size:14px}
+.material dd{font-size:32px;color:var(--deep)}
 
+/* 表格 */
 table{width:100%;border-collapse:collapse;font-size:16px}
-th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--sand)}
-th{font-weight:700}
+th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--tan)}
 .scroll{overflow-x:auto;position:relative}
 .compare table{min-width:680px}
-.compare .ours{background:var(--blush);color:var(--cocoa);font-weight:700}
-.compare{padding-top:0}
-.specs{background:var(--blush)}
+.compare .ours{background:var(--hot);color:var(--night);font-weight:900}
+.fx .compare .ours{background:linear-gradient(var(--hot),var(--hot)) left/0 100% no-repeat;transition:background-size .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0)*110ms)}
+.fx .compare .in .ours{background-size:100% 100%}
+.specs{background:var(--mist)}
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;align-items:start}
 .spec-grid th{width:38%}
-.spec-grid th,.spec-grid td{border-color:#c5ad99}
+.fx .spec-grid tr,.fx .safety tbody tr{transition:opacity .5s,transform .6s;transition-delay:calc(var(--i,0)*70ms)}
+.fx .spec-grid:not(.in) tr,.fx .safety table:not(.in) tbody tr{opacity:0;transform:translateX(28px)}
 .specs .note{margin-top:18px}
-
-.safety{display:grid;grid-template-columns:1fr 1.35fr;gap:40px 72px}
+.safety{display:grid;grid-template-columns:1fr 1.35fr;gap:40px 72px;align-items:center}
+.safety h2{font-size:clamp(32px,4vw,56px)}
 .safety h2+p{margin-top:20px}
-.law{margin-top:26px;padding:22px 24px;background:var(--blush);font-size:15px}
+.law{margin-top:26px;padding:22px 24px;background:var(--mist);font-size:15px}
 .law ul{margin:8px 0;padding-left:20px}
 
-.road{background:var(--ink);color:var(--cream)}
-.road .intro p,.road .note{color:var(--sand)}
+/* 時程 */
+.road{background:var(--night);color:var(--paper)}
+.road .intro p,.road .note{color:var(--tan)}
+.route{position:relative;height:64px;margin-bottom:24px;border-bottom:4px solid #343832}
+.route i{position:absolute;left:0;bottom:-4px;height:4px;width:100%;background:var(--hot);transform:scaleX(var(--r,1));transform-origin:left}
+.route svg{position:absolute;bottom:0;left:calc(var(--r,1)*(100% - 90px));width:90px;height:53px}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:0;margin:0 0 28px}
-.steps b{display:block;color:var(--sand);padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--muted)}
+.steps b{display:block;color:var(--hot);margin-bottom:6px}
 .steps h3{margin-bottom:4px}
+.steps p{font-size:15px}
+.fx .steps li{transition:opacity .4s,transform .4s}
+.fx .steps li.off{opacity:.45;transform:translateY(10px)}
 
 .green{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.green h3{color:var(--rust);margin-bottom:8px}
-.offer{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;background:var(--blush);align-items:center}
-.price{font:clamp(54px,6vw,92px)/1.2 var(--kai);color:var(--cocoa);white-space:nowrap}
-footer{padding:48px var(--gut);background:var(--cocoa);color:var(--cream);font-size:14px}
-footer .team{font:24px/1.7 var(--kai);margin-bottom:20px}
+.green h3{color:var(--deep);margin-bottom:8px}
+.offer{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;align-items:center;background:var(--hot);color:var(--night)}
+.offer .note{color:inherit}
+.price{font-size:clamp(56px,8vw,118px);line-height:1.3}
+.fx .rv{transition:opacity .8s,transform .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0)*120ms)}
+.fx .rv:not(.in){opacity:0;transform:translateY(38px)}
+
+footer{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:100px var(--gut) 72px;background:var(--night);color:var(--paper);font-size:14px;overflow:hidden}
+footer .lockup{width:100%;max-width:520px}
+.fx footer .lockup:not(.play){visibility:hidden}
+.foot{min-width:0}
+.team{font-size:20px;line-height:1.8;margin-bottom:20px}
 footer summary{cursor:pointer}
 footer details li{margin:4px 0;overflow-wrap:anywhere}
+footer .btn{margin-top:26px}
 
-@media(max-width:820px){
+html:not(.fx) *{animation:none!important;transition:none!important}
+
+@media(max-width:1000px){.top{gap:18px}.top nav{gap:15px;font-size:14px}}
+@media(max-width:860px){
+  :root{--head:60px}
   body{font-size:16px}
-  .wrap{padding-top:64px;padding-bottom:64px}
-  .compare{padding-top:0}
-  .top{gap:12px}.top nav{gap:12px;font-size:14px}
-  .brand{font-size:15px}
+  .wrap{padding-top:76px;padding-bottom:76px}
+  .b-mark{width:50px;height:30px}.b-word{width:80px;height:19px}
+  .js .menu{display:flex}
+  .top nav{font-size:13px;gap:10px;overflow-x:auto}
+  .js .top nav{display:none;position:absolute;left:0;right:0;top:100%;padding:8px 20px 18px;background:var(--night);font-size:18px}
+  .js .top nav.open{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+  .hero-pin{grid-template-columns:minmax(0,1fr);align-content:center;gap:18px;padding-bottom:24px}
+  .emblem{order:-1;width:min(88%,46vh);justify-self:center;padding:0}
+  .hero .name{font-size:18px;margin-bottom:10px}
+  .sig{width:min(100%,400px,48vh)}
+  .hero .lead{font-size:17px;margin:16px 0}
+  .actions .btn{padding:9px 20px;font-size:15px}
+  .hero small{margin-top:12px}
+  .reveal-pin{grid-template-columns:minmax(0,1fr);align-content:center;gap:20px;padding:calc(var(--head) + 12px) 0 18px}
+  .reveal figure{width:min(100%,50vh)}
+  .reveal-side{padding:0 20px}
+  .reveal h2{font-size:26px}.reveal h2 br{display:none}
+  .facts{gap:10px 16px;margin:14px 0 10px}
+  .facts dd{font-size:24px}
+  .problem,.battery,.build,.spec-grid,.safety,.offer,.green,footer{grid-template-columns:minmax(0,1fr)}
+  .belts{height:150px}.belt{font-size:21px}.belt.a{top:52px}.belt.b{top:56px}
+  .modes-pin{grid-template-columns:minmax(0,1fr);align-content:center;gap:14px;padding:calc(var(--head) + 10px) 20px 12px}
+  .stage{order:-1;width:min(100%,48vh)}
+  .mode-text h2{font-size:26px}.mode-text h2 br{display:none}
+  .mode-lead{margin-top:2px;font-size:13px;line-height:1.5}
+  .switch{margin-top:8px}
+  .switch button{padding:5px 24px}
+  .switch span{font-size:19px}.switch small{font-size:13px}
+  .modes .note{margin-top:6px;font-size:12px}
+  .cabins{grid-template-columns:minmax(0,1fr);gap:40px;max-width:540px}
+  .day{height:330px}
+  .material dd{font-size:24px}
   .compare table{min-width:0;font-size:13px}
   .compare th,.compare td{padding:10px 5px}
   .compare tr>:first-child{white-space:nowrap}
-  .hero{display:flex;flex-direction:column;height:auto;min-height:0}
-  .hero .photo{aspect-ratio:1086/830;flex:none}
-  .hero .copy{order:2;align-self:stretch;padding:26px 20px 36px}
-  .hero .name{margin-bottom:10px}
-  .hero .lead{margin:14px 0 22px}
-  .facts{grid-template-columns:1fr 1fr}
-  .facts dd{font-size:30px}
-  .problem,.mode-grid,.battery,.build,.spec-grid,.safety,.offer,.green{grid-template-columns:minmax(0,1fr)}
-  .cabins{grid-template-columns:1fr}
-  .days{display:block}
-  .day{height:300px;margin-bottom:16px}
-  .steps{grid-template-columns:1fr 1fr}
-  .material dd{font-size:23px}
   .safety th,.safety td{padding:10px 6px;font-size:14px}
+  .steps{grid-template-columns:1fr 1fr}
 }
-@media(min-width:821px) and (max-height:760px){
-  .hero .copy{padding-top:16px;padding-bottom:16px}
-  .hero h1{font-size:min(8vw,106px)}
-  .hero .name{margin-bottom:8px}
-  .hero .lead{margin:14px 0 18px;font-size:22px}
-  .hero small{margin-top:12px}
-  .hero .photo img{object-position:60% 88%}
+/* 高度不足時不釘選，避免內容被裁切 */
+@media(max-height:540px),(max-width:860px) and (max-height:639px){
+  .fx .hero,.fx .reveal,.fx .modes{height:auto}
+  .fx .hero-pin,.fx .reveal-pin,.fx .modes-pin{position:relative;height:auto}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-@media print{.top{position:static}.hero{height:560px}}
+@media print{.top,.boot,#speed{display:none!important}}
+@media(min-width:861px) and (max-height:760px){.scenes.pinned .day{height:calc(100vh - 340px)}.scenes.pinned h2{font-size:34px}.scenes.pinned .intro{margin-bottom:16px}.scenes.pinned .track-line{margin-top:14px}}
+@media(min-width:861px) and (max-height:720px){.mode-text h2{font-size:38px}.switch{margin-top:12px}.switch button{padding-top:8px;padding-bottom:8px}.switch span{font-size:24px}}
 </style>
 </head>
 <body>
+<svg class="defs" aria-hidden="true" focusable="false"><defs><linearGradient id="lg-box" gradientUnits="userSpaceOnUse" x1="800" y1="320" x2="1100" y2="440"><stop offset="0" stop-color="#d9c6b8"/><stop offset="1" stop-color="#c5ab98"/></linearGradient><linearGradient id="lg-road" gradientUnits="userSpaceOnUse" x1="468" y1="583" x2="1059" y2="540"><stop offset="0" stop-color="#dccabd"/><stop offset="0.6" stop-color="#c9b09c"/><stop offset="1" stop-color="#bea28d"/></linearGradient><linearGradient id="lg-s1" gradientUnits="userSpaceOnUse" x1="977" y1="243" x2="1215" y2="232"><stop offset="0" stop-color="#fbe0cf"/><stop offset="0.55" stop-color="#fa7c28"/><stop offset="1" stop-color="#ff6200"/></linearGradient><linearGradient id="lg-s2" gradientUnits="userSpaceOnUse" x1="957" y1="278" x2="1138" y2="272"><stop offset="0" stop-color="#fce5d8"/><stop offset="0.7" stop-color="#f98946"/><stop offset="1" stop-color="#ff6a10"/></linearGradient><linearGradient id="lg-bar" gradientUnits="userSpaceOnUse" x1="696" y1="715" x2="856" y2="675"><stop offset="0" stop-color="#c8aa96"/><stop offset="0.45" stop-color="#e6d6c9"/><stop offset="1" stop-color="#c3a994"/></linearGradient><linearGradient id="lg-top" gradientUnits="userSpaceOnUse" x1="1139" y1="642" x2="1251" y2="642"><stop offset="0" stop-color="#ff7a1a"/><stop offset="0.5" stop-color="#f86400"/><stop offset="1" stop-color="#d94f00"/></linearGradient></defs><symbol id="mark" viewBox="455 140 770 455"><g class="p road"><path fill="url(#lg-road)" fill-rule="evenodd" d="M832 528L839 527.4L918 527.5L971 529.5L1003 532.1L1014 532.3L1017 533.3L1042 535.5L1058.1 545L1059.4 546L1059.3 547L1058 547.5L962 546.6L875 547.9L770 552.2L674 559L649 560.8L647 561.5L618 563.8L590 567.5L577 568.2L572 569.7L561 570.2L554 571.6L529 573.9L522 575.5L505 577.6L502 578.6L486 580.3L483 581.3L470 583.3L468.3 583L468.3 582L471 580.6L479 578.5L493 573.3L498 572.5L514 567.7L519 567.2L537 562.4L545 561.5L552 559.3L558 559L561 557.6L566 557.4L584 553.5L590 553.2L595 551.6L606 550.7L609 549.5L630 546.9L635 545.6L645.5 545L649 543.4L660 542.8L665 541.3L686 539.5L689 538.5L697 537.5L710 536.8L715 535.6L726 535L732 533.8L752 532.7L761 531.4L793 529.4Z"/></g><g class="back"><g class="p rear"><path fill="currentColor" fill-rule="evenodd" d="M590.6 304L608 303.3L629 305.8L646 310.7L665 319.8L682 331.6L694 343.3L704.1 356L711.4 368L713.7 373L713 374.2L682 384.3L681 383.8L674.3 373L669.6 367L661 358.3L652.8 352L644 346.6L633 341.6L617 337.4L606 336.2L590 337.3L576 340.5L563 345.9L556 349.7L546 357L536.5 366L530.9 373L525.9 381L518.9 396L514.6 412L513.4 431L513.9 438L516 448.8L520.8 463L525.9 473L532.5 483L539.4 491L549.4 500L566 510.2L577 514.4L590 517.4L600 518.4L611 518L621 516.5L632 513.3L642 509.2L652 503.4L661.8 496L669.8 488L676 480L682.5 469L687.3 457L690.9 444L723 436.2L724 436.1L724.8 437L723.2 451L720.1 464L716.2 475L710.4 487L704.3 497L695 508.7L685 518.7L672 528.4L663 533.4L653 536.2L572 548.7L557.3 544L545 538.3L531 529.3L522 522.2L513 513.6L504 502.9L496.8 492L488.7 476L484.9 466L480.9 450L479 435L479.1 420L481.8 402L484.9 391L490.9 376L496.8 365L504.8 353L514 342.3L524 332.8L536 323.8L550 315.8L564.1 310L579 305.9Z"/></g><g class="p arm"><path fill="currentColor" fill-rule="evenodd" d="M727.8 379L730.3 379L728.1 385L726.8 392L728.1 403L731.6 411L736 416.3L741.5 421L741 422L600 454.1L595 454.6L590 453.4L585.3 450L582.7 446L581.5 440L582.6 435L585 431L589 427.8Z"/></g><g class="p post"><path fill="currentColor" fill-rule="evenodd" d="M703 239L706 238.8L707.4 240L759.3 359L759 360.1L749 361.6L733 367.3L727 369.3L725.8 368L678.8 244L679 242.1L680 241.7Z"/></g><g class="p saddle"><path fill="currentColor" fill-rule="evenodd" d="M630.8 195L739 202.8L745 206L748.4 210L749.9 215L749 220L747 223.1L743 225.7L727 227.9L649 236.3L642 235.6L637 234.2L631 231.3L624 225.5L618.8 219L616.2 212L616.7 205L619 200.7L624 196.8Z"/></g></g><g class="front"><g class="p frame"><path fill="currentColor" fill-rule="evenodd" d="M1103.9 361L1109 361.5L1112 362.8L1114.3 366L1114.8 369L1113.4 374L1103.2 389L1102.6 390L1103 390.7L1115 388.8L1127 390.5L1140 395L1149 399.7L1155 403.8L1167 414.7L1176.2 427L1182.4 440L1186 452.4L1187.4 466L1186.8 479L1184.2 491L1179.4 503L1172.2 515L1163.6 525L1154 533.4L1143 540.3L1134 544.3L1125 547.3L1115 549.2L1103 549.8L1093 549.2L1083 547.2L1074 544L1066 540.2L1057 534.4L1050.5 529L1041.7 519L1036.9 512L1033.6 506L1029.6 496L1026.7 485L1026.1 478L1025 476.7L891 476.6L825 476.4L815 473.8L806.3 469L801.9 465L768.1 426L768.4 425L778 420L783 415.5L787.4 409L791 399.8L827 439.8L834 444.3L842 447.4L849 448.3L1019 448.1L1024 447.2L1029.9 445L1035 442.1L1040 437.9L1046 430.7L1094 366L1098 362.8ZM1099 417L1086 420.6L1079.8 424L1055.7 459L1054.3 468L1054.6 477L1056.6 486L1060.6 495L1067.9 505L1075 511.4L1083 516.2L1095 520.2L1103 521.2L1113 520.6L1122 518.3L1131 514.3L1139.7 508L1147.3 500L1152.4 492L1156.3 482L1157.9 473L1157.7 462L1155.3 452L1150.1 441L1144 433L1137 426.8L1127 420.8L1118 417.8L1108 416.3Z"/></g><g class="p handle"><path fill="currentColor" fill-rule="evenodd" d="M835.3 151L842 150.1L928 163.9L933.8 166L938.2 170L940.5 175L940.9 180L939.6 185L936.7 189L933.6 191L930 192.2L914 190.8L913.1 192L944.5 305L944.3 306L943 306.5L851 306.5L842 307.8L832 312.9L826.6 318L801.6 358L789 378.7L788 378.9L783.3 372L778 367L773 363.8L765.1 361L764.7 360L799.7 303L803 298.4L807.4 294L814 289.8L822 286.7L888 275.2L904.8 272L906.9 271L898.6 238L885 188L884 186.8L882 186.3L838 179.9L835 179.1L831 177L826.9 172L825.6 168L825.6 163L826.8 159L828.6 156L832 152.7Z"/></g><g class="p box"><path fill="url(#lg-box)" fill-rule="evenodd" d="M845 316L849 315.4L1083 315.5L1089 315.9L1096 318.7L1099.5 322L1103.2 327L1103.9 329L1103.4 338L1100 345.4L1084 364.9L1077.3 375L1074.9 377L1072 382.4L1064.5 391L1058.9 400L1051.9 408L1047.1 416L1040 424.4L1031 434.4L1029 435.8L1025 437.8L1017 439.4L850 439.7L839 437.1L828.6 429L815 412.9L811.3 410L804.6 401L797.8 395L796.8 392L797 383L797.3 381L800.8 374L807 366.3L809.3 361L811.2 359L818 347L824.4 338L827.4 332L832 325L838 319.6Z"/></g><g class="p s1"><path fill="url(#lg-s1)" fill-rule="evenodd" d="M1200.6 218L1206 217.3L1211 217.5L1214.4 220L1215.3 223L1214.7 225L1210.7 230L1197 244.1L1192 246.5L1186 247.8L997 244.5L981 243.8L977.4 243L977.7 242L979 241.6L993 239.3L1123 225.3Z"/></g><g class="p s2"><path fill="url(#lg-s2)" fill-rule="evenodd" d="M1128 260L1132 259.6L1136 260.4L1137.9 263L1137.7 266L1134 270.7L1125 279.8L1120 282.5L1115 283.6L981 279.8L972 279.1L967 278L967 277L968 276.7L976 275L1028 269.3Z"/></g></g><g class="p hinge"><circle cx="759" cy="393.8" r="17.799999999999997" fill="none" stroke="#ff6a00" stroke-width="15.2"/></g></symbol><symbol id="word" viewBox="414 597 846 202"><g class="p c1"><path fill="currentColor" fill-rule="evenodd" d="M438.6 681L618 680.8L619.7 682L619.4 685L610.4 711L608 713.2L602 713.6L421 713.4L420.1 712L420.4 711L433 685L435 682.6Z"/></g><g class="p c2"><path fill="currentColor" fill-rule="evenodd" d="M859.2 604L863 603.8L863.7 606L856.4 629L854 631.5L781 641.8L777.6 644L775.8 647L767 676.7L727 686.7L724 687.5L723.8 686L739.8 631L742.5 623L747 618.5L751 617.2ZM681.4 605L684 604.2L693 604.1L718 604.2L719.8 605L713 633.9L714 634.4L726 634.5L726.8 636L719.3 661L718 662.8L716 663.7L706 663.8L704.1 665L696.7 693L697.4 694L700.7 694L701.1 695L693.7 721L693 722.3L689 723.7L687.7 725L679.3 758L671.2 773L665 781.7L659 787.2L651 790.4L644 791.1L615 791.1L606 791.1L605 790.8L604.7 789L614.7 770L617 767.1L621 764.9L631 763L634 761.2L637 757.9L640.2 751L644.3 735L644 733.1L643 733L623 737.1L622 737.1L621.1 736L628.7 711L630 708.6L633 706.6L653.1 702L662.6 666L662 664L661 663.9L642 663.8L640.5 663L640.6 661L649.7 638L651 636.1L655 634.5L671 634L677.7 609L679 606.7ZM821.8 708L824.5 708L824.2 711L805 789.3L804 790.5L802 790.9L768 791.1L765 790.9L764.3 789L781.5 720ZM712.8 722L714 722.1L717 726.4L721.2 730L728 733.2L737 733.9L749 730.5L749.8 732L745.4 743L737.5 756L717.4 787L715 789.4L712 790.6L674 791.1L672 790L704.2 740Z"/><path fill="url(#lg-bar)" fill-rule="evenodd" d="M846 660L852 659.4L855 661L856 663L855.9 670L854.1 678L852.5 682L850.9 692L847.9 696L844 699.4L835 702.5L825 704.2L807 709.8L797.3 712L791 714.5L784 715.6L758 723.2L753 723.3L750 725.6L740 729.8L734 730.5L729 729.7L725.1 728L721.6 726L716 721L716 719L714 716L714.6 705L717.4 698L719.8 695L726 690.6L733 688.7L751 686L756 683.5L766 680.7L768 679.5L775 678.9L790 673.9L795 673.2L800 671.2L806 670.6L808 669.4L814 668.4L834 662.4L838 662.4ZM730 690.9L724 693.6L718.8 699L715.5 707L715.6 713L718.6 720L725 726.2L730 728.3L739 728.4L745.9 725L751.2 719L753.4 712L753.2 706L751.6 701L749.8 698L745 693.3L742 691.6L738 690.4ZM711.7 693L714 692.6L715.5 694L711.7 701L710.2 709L713 717L711 719.4L703 720.1L697 720.6L696 718L696 714L698.6 710L699 703.5L700.8 699L701 696L705 694Z"/><circle cx="734.5" cy="710" r="12.899999999999999" fill="none" stroke="#ff6a00" stroke-width="10.999999999999998"/></g><g class="p c3"><path fill="currentColor" fill-rule="evenodd" d="M893.2 630L898 629L968 629.1L969.7 630L967.1 644L952.5 708L949.3 718L947 720.1L944 721.2L901 721.3L900 721.5L899.2 723L892 754L893 755L913.2 751L913.9 749L912.9 732L915 729.2L924 728.7L938 729.1L939.2 732L941.6 776L941.5 780L940.7 781L938 781.7L918 781.5L916.5 780L916 775L915 773.6L858 786.8L856 786L888.9 641L890.9 633ZM980.7 630L984 629.2L1054 629.1L1055.9 630L1056 631L1031.3 742L1027.1 755L1024.6 759L1020.7 763L1017 765.6L1013 767.1L1007 768.2L984.7 768L984 766L989 747.4L992 744.8L998 743.6L1000.2 742L1001.4 740L1018.8 663L1020.8 654L1020 652.6L1005 652.6L1003.6 654L973.6 789L972 790.6L970 790.9L944 790.7L943.4 789L976.5 639L978 633.1ZM916 650.5L912.9 664L913.5 665L933.5 665L934.6 663L937 650.7L935 650.1ZM909 684.8L907.5 686L904.7 698L905 699.3L925 699.7L926 699.4L926.8 698L929.4 686L929 685Z"/></g><g class="p c4"><path fill="currentColor" fill-rule="evenodd" d="M1106.2 627L1112 626.4L1136.3 627L1136.1 629L1131.5 636L1120 651L1111 660.5L1099.2 670L1101 670.7L1126 670.9L1127.8 672L1127.6 673L1112 695L1109.9 699L1089.6 789L1088 790.6L1086 791L1058 791L1057 790.7L1056.6 789L1071.7 723L1070 722.3L1057 725.1L1053 725.2L1052.9 723L1056.6 709L1059 705.5L1068 700.1L1076 693.9L1087.3 682L1093.7 673L1091 672.8L1066 678.3L1064.7 678L1064.3 676L1068.5 662L1070 659.4L1080 653.2L1087 647.4L1094.4 640L1103.1 629ZM1134.6 678L1147 677.3L1247 677.3L1249 677.5L1250 678.5L1249.1 683L1242 703.1L1239 704.4L1220 704.4L1218.4 705L1206.1 760L1203 770.8L1200 777L1196.3 782L1191.7 786L1185.9 789L1177 790.9L1131 791.1L1129.6 790L1139 770.1L1141 767.5L1146 765.3L1161 764.7L1164.5 763L1167.2 760L1169.3 754L1180.1 706L1180 704.9L1178 704.3L1123.7 704L1123.2 702L1130.6 682L1132 679.7Z"/><path fill="url(#lg-top)" fill-rule="evenodd" d="M1167.5 629L1250 629.6L1251 630.5L1251 632.2L1242.9 649L1240.1 653L1235 655.5L1225 655.7L1140 655.4L1139.1 654L1139.8 652L1147.7 639L1151.6 634L1159 629.6Z"/></g></symbol></svg>
+
+<div class="boot" aria-hidden="true"><div class="lockup play"><svg class="logo m" viewBox="455 140 770 455" aria-hidden="true"><g class="p road"><path fill="url(#lg-road)" fill-rule="evenodd" d="M832 528L839 527.4L918 527.5L971 529.5L1003 532.1L1014 532.3L1017 533.3L1042 535.5L1058.1 545L1059.4 546L1059.3 547L1058 547.5L962 546.6L875 547.9L770 552.2L674 559L649 560.8L647 561.5L618 563.8L590 567.5L577 568.2L572 569.7L561 570.2L554 571.6L529 573.9L522 575.5L505 577.6L502 578.6L486 580.3L483 581.3L470 583.3L468.3 583L468.3 582L471 580.6L479 578.5L493 573.3L498 572.5L514 567.7L519 567.2L537 562.4L545 561.5L552 559.3L558 559L561 557.6L566 557.4L584 553.5L590 553.2L595 551.6L606 550.7L609 549.5L630 546.9L635 545.6L645.5 545L649 543.4L660 542.8L665 541.3L686 539.5L689 538.5L697 537.5L710 536.8L715 535.6L726 535L732 533.8L752 532.7L761 531.4L793 529.4Z"/></g><g class="back"><g class="p rear"><path fill="currentColor" fill-rule="evenodd" d="M590.6 304L608 303.3L629 305.8L646 310.7L665 319.8L682 331.6L694 343.3L704.1 356L711.4 368L713.7 373L713 374.2L682 384.3L681 383.8L674.3 373L669.6 367L661 358.3L652.8 352L644 346.6L633 341.6L617 337.4L606 336.2L590 337.3L576 340.5L563 345.9L556 349.7L546 357L536.5 366L530.9 373L525.9 381L518.9 396L514.6 412L513.4 431L513.9 438L516 448.8L520.8 463L525.9 473L532.5 483L539.4 491L549.4 500L566 510.2L577 514.4L590 517.4L600 518.4L611 518L621 516.5L632 513.3L642 509.2L652 503.4L661.8 496L669.8 488L676 480L682.5 469L687.3 457L690.9 444L723 436.2L724 436.1L724.8 437L723.2 451L720.1 464L716.2 475L710.4 487L704.3 497L695 508.7L685 518.7L672 528.4L663 533.4L653 536.2L572 548.7L557.3 544L545 538.3L531 529.3L522 522.2L513 513.6L504 502.9L496.8 492L488.7 476L484.9 466L480.9 450L479 435L479.1 420L481.8 402L484.9 391L490.9 376L496.8 365L504.8 353L514 342.3L524 332.8L536 323.8L550 315.8L564.1 310L579 305.9Z"/></g><g class="p arm"><path fill="currentColor" fill-rule="evenodd" d="M727.8 379L730.3 379L728.1 385L726.8 392L728.1 403L731.6 411L736 416.3L741.5 421L741 422L600 454.1L595 454.6L590 453.4L585.3 450L582.7 446L581.5 440L582.6 435L585 431L589 427.8Z"/></g><g class="p post"><path fill="currentColor" fill-rule="evenodd" d="M703 239L706 238.8L707.4 240L759.3 359L759 360.1L749 361.6L733 367.3L727 369.3L725.8 368L678.8 244L679 242.1L680 241.7Z"/></g><g class="p saddle"><path fill="currentColor" fill-rule="evenodd" d="M630.8 195L739 202.8L745 206L748.4 210L749.9 215L749 220L747 223.1L743 225.7L727 227.9L649 236.3L642 235.6L637 234.2L631 231.3L624 225.5L618.8 219L616.2 212L616.7 205L619 200.7L624 196.8Z"/></g></g><g class="front"><g class="p frame"><path fill="currentColor" fill-rule="evenodd" d="M1103.9 361L1109 361.5L1112 362.8L1114.3 366L1114.8 369L1113.4 374L1103.2 389L1102.6 390L1103 390.7L1115 388.8L1127 390.5L1140 395L1149 399.7L1155 403.8L1167 414.7L1176.2 427L1182.4 440L1186 452.4L1187.4 466L1186.8 479L1184.2 491L1179.4 503L1172.2 515L1163.6 525L1154 533.4L1143 540.3L1134 544.3L1125 547.3L1115 549.2L1103 549.8L1093 549.2L1083 547.2L1074 544L1066 540.2L1057 534.4L1050.5 529L1041.7 519L1036.9 512L1033.6 506L1029.6 496L1026.7 485L1026.1 478L1025 476.7L891 476.6L825 476.4L815 473.8L806.3 469L801.9 465L768.1 426L768.4 425L778 420L783 415.5L787.4 409L791 399.8L827 439.8L834 444.3L842 447.4L849 448.3L1019 448.1L1024 447.2L1029.9 445L1035 442.1L1040 437.9L1046 430.7L1094 366L1098 362.8ZM1099 417L1086 420.6L1079.8 424L1055.7 459L1054.3 468L1054.6 477L1056.6 486L1060.6 495L1067.9 505L1075 511.4L1083 516.2L1095 520.2L1103 521.2L1113 520.6L1122 518.3L1131 514.3L1139.7 508L1147.3 500L1152.4 492L1156.3 482L1157.9 473L1157.7 462L1155.3 452L1150.1 441L1144 433L1137 426.8L1127 420.8L1118 417.8L1108 416.3Z"/></g><g class="p handle"><path fill="currentColor" fill-rule="evenodd" d="M835.3 151L842 150.1L928 163.9L933.8 166L938.2 170L940.5 175L940.9 180L939.6 185L936.7 189L933.6 191L930 192.2L914 190.8L913.1 192L944.5 305L944.3 306L943 306.5L851 306.5L842 307.8L832 312.9L826.6 318L801.6 358L789 378.7L788 378.9L783.3 372L778 367L773 363.8L765.1 361L764.7 360L799.7 303L803 298.4L807.4 294L814 289.8L822 286.7L888 275.2L904.8 272L906.9 271L898.6 238L885 188L884 186.8L882 186.3L838 179.9L835 179.1L831 177L826.9 172L825.6 168L825.6 163L826.8 159L828.6 156L832 152.7Z"/></g><g class="p box"><path fill="url(#lg-box)" fill-rule="evenodd" d="M845 316L849 315.4L1083 315.5L1089 315.9L1096 318.7L1099.5 322L1103.2 327L1103.9 329L1103.4 338L1100 345.4L1084 364.9L1077.3 375L1074.9 377L1072 382.4L1064.5 391L1058.9 400L1051.9 408L1047.1 416L1040 424.4L1031 434.4L1029 435.8L1025 437.8L1017 439.4L850 439.7L839 437.1L828.6 429L815 412.9L811.3 410L804.6 401L797.8 395L796.8 392L797 383L797.3 381L800.8 374L807 366.3L809.3 361L811.2 359L818 347L824.4 338L827.4 332L832 325L838 319.6Z"/></g><g class="p s1"><path fill="url(#lg-s1)" fill-rule="evenodd" d="M1200.6 218L1206 217.3L1211 217.5L1214.4 220L1215.3 223L1214.7 225L1210.7 230L1197 244.1L1192 246.5L1186 247.8L997 244.5L981 243.8L977.4 243L977.7 242L979 241.6L993 239.3L1123 225.3Z"/></g><g class="p s2"><path fill="url(#lg-s2)" fill-rule="evenodd" d="M1128 260L1132 259.6L1136 260.4L1137.9 263L1137.7 266L1134 270.7L1125 279.8L1120 282.5L1115 283.6L981 279.8L972 279.1L967 278L967 277L968 276.7L976 275L1028 269.3Z"/></g></g><g class="p hinge"><circle cx="759" cy="393.8" r="17.799999999999997" fill="none" stroke="#ff6a00" stroke-width="15.2"/></g></svg><svg class="logo w" viewBox="414 597 846 202" aria-hidden="true"><g class="p c1"><path fill="currentColor" fill-rule="evenodd" d="M438.6 681L618 680.8L619.7 682L619.4 685L610.4 711L608 713.2L602 713.6L421 713.4L420.1 712L420.4 711L433 685L435 682.6Z"/></g><g class="p c2"><path fill="currentColor" fill-rule="evenodd" d="M859.2 604L863 603.8L863.7 606L856.4 629L854 631.5L781 641.8L777.6 644L775.8 647L767 676.7L727 686.7L724 687.5L723.8 686L739.8 631L742.5 623L747 618.5L751 617.2ZM681.4 605L684 604.2L693 604.1L718 604.2L719.8 605L713 633.9L714 634.4L726 634.5L726.8 636L719.3 661L718 662.8L716 663.7L706 663.8L704.1 665L696.7 693L697.4 694L700.7 694L701.1 695L693.7 721L693 722.3L689 723.7L687.7 725L679.3 758L671.2 773L665 781.7L659 787.2L651 790.4L644 791.1L615 791.1L606 791.1L605 790.8L604.7 789L614.7 770L617 767.1L621 764.9L631 763L634 761.2L637 757.9L640.2 751L644.3 735L644 733.1L643 733L623 737.1L622 737.1L621.1 736L628.7 711L630 708.6L633 706.6L653.1 702L662.6 666L662 664L661 663.9L642 663.8L640.5 663L640.6 661L649.7 638L651 636.1L655 634.5L671 634L677.7 609L679 606.7ZM821.8 708L824.5 708L824.2 711L805 789.3L804 790.5L802 790.9L768 791.1L765 790.9L764.3 789L781.5 720ZM712.8 722L714 722.1L717 726.4L721.2 730L728 733.2L737 733.9L749 730.5L749.8 732L745.4 743L737.5 756L717.4 787L715 789.4L712 790.6L674 791.1L672 790L704.2 740Z"/><path fill="url(#lg-bar)" fill-rule="evenodd" d="M846 660L852 659.4L855 661L856 663L855.9 670L854.1 678L852.5 682L850.9 692L847.9 696L844 699.4L835 702.5L825 704.2L807 709.8L797.3 712L791 714.5L784 715.6L758 723.2L753 723.3L750 725.6L740 729.8L734 730.5L729 729.7L725.1 728L721.6 726L716 721L716 719L714 716L714.6 705L717.4 698L719.8 695L726 690.6L733 688.7L751 686L756 683.5L766 680.7L768 679.5L775 678.9L790 673.9L795 673.2L800 671.2L806 670.6L808 669.4L814 668.4L834 662.4L838 662.4ZM730 690.9L724 693.6L718.8 699L715.5 707L715.6 713L718.6 720L725 726.2L730 728.3L739 728.4L745.9 725L751.2 719L753.4 712L753.2 706L751.6 701L749.8 698L745 693.3L742 691.6L738 690.4ZM711.7 693L714 692.6L715.5 694L711.7 701L710.2 709L713 717L711 719.4L703 720.1L697 720.6L696 718L696 714L698.6 710L699 703.5L700.8 699L701 696L705 694Z"/><circle cx="734.5" cy="710" r="12.899999999999999" fill="none" stroke="#ff6a00" stroke-width="10.999999999999998"/></g><g class="p c3"><path fill="currentColor" fill-rule="evenodd" d="M893.2 630L898 629L968 629.1L969.7 630L967.1 644L952.5 708L949.3 718L947 720.1L944 721.2L901 721.3L900 721.5L899.2 723L892 754L893 755L913.2 751L913.9 749L912.9 732L915 729.2L924 728.7L938 729.1L939.2 732L941.6 776L941.5 780L940.7 781L938 781.7L918 781.5L916.5 780L916 775L915 773.6L858 786.8L856 786L888.9 641L890.9 633ZM980.7 630L984 629.2L1054 629.1L1055.9 630L1056 631L1031.3 742L1027.1 755L1024.6 759L1020.7 763L1017 765.6L1013 767.1L1007 768.2L984.7 768L984 766L989 747.4L992 744.8L998 743.6L1000.2 742L1001.4 740L1018.8 663L1020.8 654L1020 652.6L1005 652.6L1003.6 654L973.6 789L972 790.6L970 790.9L944 790.7L943.4 789L976.5 639L978 633.1ZM916 650.5L912.9 664L913.5 665L933.5 665L934.6 663L937 650.7L935 650.1ZM909 684.8L907.5 686L904.7 698L905 699.3L925 699.7L926 699.4L926.8 698L929.4 686L929 685Z"/></g><g class="p c4"><path fill="currentColor" fill-rule="evenodd" d="M1106.2 627L1112 626.4L1136.3 627L1136.1 629L1131.5 636L1120 651L1111 660.5L1099.2 670L1101 670.7L1126 670.9L1127.8 672L1127.6 673L1112 695L1109.9 699L1089.6 789L1088 790.6L1086 791L1058 791L1057 790.7L1056.6 789L1071.7 723L1070 722.3L1057 725.1L1053 725.2L1052.9 723L1056.6 709L1059 705.5L1068 700.1L1076 693.9L1087.3 682L1093.7 673L1091 672.8L1066 678.3L1064.7 678L1064.3 676L1068.5 662L1070 659.4L1080 653.2L1087 647.4L1094.4 640L1103.1 629ZM1134.6 678L1147 677.3L1247 677.3L1249 677.5L1250 678.5L1249.1 683L1242 703.1L1239 704.4L1220 704.4L1218.4 705L1206.1 760L1203 770.8L1200 777L1196.3 782L1191.7 786L1185.9 789L1177 790.9L1131 791.1L1129.6 790L1139 770.1L1141 767.5L1146 765.3L1161 764.7L1164.5 763L1167.2 760L1169.3 754L1180.1 706L1180 704.9L1178 704.3L1123.7 704L1123.2 702L1130.6 682L1132 679.7Z"/><path fill="url(#lg-top)" fill-rule="evenodd" d="M1167.5 629L1250 629.6L1251 630.5L1251 632.2L1242.9 649L1240.1 653L1235 655.5L1225 655.7L1140 655.4L1139.1 654L1139.8 652L1147.7 639L1151.6 634L1159 629.6Z"/></g></svg></div><p>點一下略過</p></div>
 
 <header class="top">
-  <a class="brand" href="#home">Flip-Cargo E+</a>
-  <nav aria-label="主選單">
-    <a href="#modes">型態</a><a href="#scenes">情境</a><a href="#power">電池</a><a href="#specs">規格</a><a href="#safety">安全</a>
-  </nav>
+  <a class="brand" href="#home" aria-label="一折即行，回到頁首"><svg class="b-mark"><use href="#mark"/></svg><svg class="b-word"><use href="#word"/></svg></a>
+  <nav id="nav" aria-label="主選單"><a href="#modes">型態</a><a href="#cabin">前艙</a><a href="#scenes">情境</a><a href="#power">電池</a><a href="#specs">規格</a><a href="#safety">安全</a></nav>
+  <button class="fx-switch" id="fxSwitch" type="button" aria-pressed="true">特效<i></i></button>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav">選單</button>
+  <div class="progress" aria-hidden="true"><svg><use href="#mark"/></svg></div>
 </header>
 
 <main id="home">
-<section class="hero">
-  <div class="copy">
-    <p class="name">Flip-Cargo E+</p>
-    <h1>一折<br>即行</h1>
-    <p class="lead"><span class="phrase">載孩子、載毛孩、</span><span class="phrase">載一週的菜，</span><span class="phrase">到了就折起來。</span></p>
-    <a class="cta" href="#modes">看它怎麼變形</a>
-    <small>折疊電輔貨運自行車・開發中的產品概念</small>
+<section class="hero" id="hero">
+  <div class="hero-pin">
+    <canvas id="speed" aria-hidden="true"></canvas>
+    <div class="horizon" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="name">Flip-Cargo E+</p>
+      <h1 class="sig" aria-label="一折即行"><svg class="logo w" viewBox="414 597 846 202" aria-hidden="true"><g class="p c1"><path fill="currentColor" fill-rule="evenodd" d="M438.6 681L618 680.8L619.7 682L619.4 685L610.4 711L608 713.2L602 713.6L421 713.4L420.1 712L420.4 711L433 685L435 682.6Z"/></g><g class="p c2"><path fill="currentColor" fill-rule="evenodd" d="M859.2 604L863 603.8L863.7 606L856.4 629L854 631.5L781 641.8L777.6 644L775.8 647L767 676.7L727 686.7L724 687.5L723.8 686L739.8 631L742.5 623L747 618.5L751 617.2ZM681.4 605L684 604.2L693 604.1L718 604.2L719.8 605L713 633.9L714 634.4L726 634.5L726.8 636L719.3 661L718 662.8L716 663.7L706 663.8L704.1 665L696.7 693L697.4 694L700.7 694L701.1 695L693.7 721L693 722.3L689 723.7L687.7 725L679.3 758L671.2 773L665 781.7L659 787.2L651 790.4L644 791.1L615 791.1L606 791.1L605 790.8L604.7 789L614.7 770L617 767.1L621 764.9L631 763L634 761.2L637 757.9L640.2 751L644.3 735L644 733.1L643 733L623 737.1L622 737.1L621.1 736L628.7 711L630 708.6L633 706.6L653.1 702L662.6 666L662 664L661 663.9L642 663.8L640.5 663L640.6 661L649.7 638L651 636.1L655 634.5L671 634L677.7 609L679 606.7ZM821.8 708L824.5 708L824.2 711L805 789.3L804 790.5L802 790.9L768 791.1L765 790.9L764.3 789L781.5 720ZM712.8 722L714 722.1L717 726.4L721.2 730L728 733.2L737 733.9L749 730.5L749.8 732L745.4 743L737.5 756L717.4 787L715 789.4L712 790.6L674 791.1L672 790L704.2 740Z"/><path fill="url(#lg-bar)" fill-rule="evenodd" d="M846 660L852 659.4L855 661L856 663L855.9 670L854.1 678L852.5 682L850.9 692L847.9 696L844 699.4L835 702.5L825 704.2L807 709.8L797.3 712L791 714.5L784 715.6L758 723.2L753 723.3L750 725.6L740 729.8L734 730.5L729 729.7L725.1 728L721.6 726L716 721L716 719L714 716L714.6 705L717.4 698L719.8 695L726 690.6L733 688.7L751 686L756 683.5L766 680.7L768 679.5L775 678.9L790 673.9L795 673.2L800 671.2L806 670.6L808 669.4L814 668.4L834 662.4L838 662.4ZM730 690.9L724 693.6L718.8 699L715.5 707L715.6 713L718.6 720L725 726.2L730 728.3L739 728.4L745.9 725L751.2 719L753.4 712L753.2 706L751.6 701L749.8 698L745 693.3L742 691.6L738 690.4ZM711.7 693L714 692.6L715.5 694L711.7 701L710.2 709L713 717L711 719.4L703 720.1L697 720.6L696 718L696 714L698.6 710L699 703.5L700.8 699L701 696L705 694Z"/><circle cx="734.5" cy="710" r="12.899999999999999" fill="none" stroke="#ff6a00" stroke-width="10.999999999999998"/></g><g class="p c3"><path fill="currentColor" fill-rule="evenodd" d="M893.2 630L898 629L968 629.1L969.7 630L967.1 644L952.5 708L949.3 718L947 720.1L944 721.2L901 721.3L900 721.5L899.2 723L892 754L893 755L913.2 751L913.9 749L912.9 732L915 729.2L924 728.7L938 729.1L939.2 732L941.6 776L941.5 780L940.7 781L938 781.7L918 781.5L916.5 780L916 775L915 773.6L858 786.8L856 786L888.9 641L890.9 633ZM980.7 630L984 629.2L1054 629.1L1055.9 630L1056 631L1031.3 742L1027.1 755L1024.6 759L1020.7 763L1017 765.6L1013 767.1L1007 768.2L984.7 768L984 766L989 747.4L992 744.8L998 743.6L1000.2 742L1001.4 740L1018.8 663L1020.8 654L1020 652.6L1005 652.6L1003.6 654L973.6 789L972 790.6L970 790.9L944 790.7L943.4 789L976.5 639L978 633.1ZM916 650.5L912.9 664L913.5 665L933.5 665L934.6 663L937 650.7L935 650.1ZM909 684.8L907.5 686L904.7 698L905 699.3L925 699.7L926 699.4L926.8 698L929.4 686L929 685Z"/></g><g class="p c4"><path fill="currentColor" fill-rule="evenodd" d="M1106.2 627L1112 626.4L1136.3 627L1136.1 629L1131.5 636L1120 651L1111 660.5L1099.2 670L1101 670.7L1126 670.9L1127.8 672L1127.6 673L1112 695L1109.9 699L1089.6 789L1088 790.6L1086 791L1058 791L1057 790.7L1056.6 789L1071.7 723L1070 722.3L1057 725.1L1053 725.2L1052.9 723L1056.6 709L1059 705.5L1068 700.1L1076 693.9L1087.3 682L1093.7 673L1091 672.8L1066 678.3L1064.7 678L1064.3 676L1068.5 662L1070 659.4L1080 653.2L1087 647.4L1094.4 640L1103.1 629ZM1134.6 678L1147 677.3L1247 677.3L1249 677.5L1250 678.5L1249.1 683L1242 703.1L1239 704.4L1220 704.4L1218.4 705L1206.1 760L1203 770.8L1200 777L1196.3 782L1191.7 786L1185.9 789L1177 790.9L1131 791.1L1129.6 790L1139 770.1L1141 767.5L1146 765.3L1161 764.7L1164.5 763L1167.2 760L1169.3 754L1180.1 706L1180 704.9L1178 704.3L1123.7 704L1123.2 702L1130.6 682L1132 679.7Z"/><path fill="url(#lg-top)" fill-rule="evenodd" d="M1167.5 629L1250 629.6L1251 630.5L1251 632.2L1242.9 649L1240.1 653L1235 655.5L1225 655.7L1140 655.4L1139.1 654L1139.8 652L1147.7 639L1151.6 634L1159 629.6Z"/></g></svg></h1>
+      <p class="lead"><span class="phrase">載孩子、載毛孩、</span><span class="phrase">載一週的菜，</span><span class="phrase">到了就折起來。</span></p>
+      <div class="actions"><a class="btn magnet" href="#modes">看它怎麼變形</a><button class="btn line magnet" id="foldBtn" type="button" aria-pressed="false">折一下 LOGO</button></div>
+      <small>折疊電輔貨運自行車・開發中的產品概念</small>
+    </div>
+    <div class="emblem" id="emblem"><svg class="logo m" viewBox="455 140 770 455" aria-hidden="true"><g class="p road"><path fill="url(#lg-road)" fill-rule="evenodd" d="M832 528L839 527.4L918 527.5L971 529.5L1003 532.1L1014 532.3L1017 533.3L1042 535.5L1058.1 545L1059.4 546L1059.3 547L1058 547.5L962 546.6L875 547.9L770 552.2L674 559L649 560.8L647 561.5L618 563.8L590 567.5L577 568.2L572 569.7L561 570.2L554 571.6L529 573.9L522 575.5L505 577.6L502 578.6L486 580.3L483 581.3L470 583.3L468.3 583L468.3 582L471 580.6L479 578.5L493 573.3L498 572.5L514 567.7L519 567.2L537 562.4L545 561.5L552 559.3L558 559L561 557.6L566 557.4L584 553.5L590 553.2L595 551.6L606 550.7L609 549.5L630 546.9L635 545.6L645.5 545L649 543.4L660 542.8L665 541.3L686 539.5L689 538.5L697 537.5L710 536.8L715 535.6L726 535L732 533.8L752 532.7L761 531.4L793 529.4Z"/></g><g class="back"><g class="p rear"><path fill="currentColor" fill-rule="evenodd" d="M590.6 304L608 303.3L629 305.8L646 310.7L665 319.8L682 331.6L694 343.3L704.1 356L711.4 368L713.7 373L713 374.2L682 384.3L681 383.8L674.3 373L669.6 367L661 358.3L652.8 352L644 346.6L633 341.6L617 337.4L606 336.2L590 337.3L576 340.5L563 345.9L556 349.7L546 357L536.5 366L530.9 373L525.9 381L518.9 396L514.6 412L513.4 431L513.9 438L516 448.8L520.8 463L525.9 473L532.5 483L539.4 491L549.4 500L566 510.2L577 514.4L590 517.4L600 518.4L611 518L621 516.5L632 513.3L642 509.2L652 503.4L661.8 496L669.8 488L676 480L682.5 469L687.3 457L690.9 444L723 436.2L724 436.1L724.8 437L723.2 451L720.1 464L716.2 475L710.4 487L704.3 497L695 508.7L685 518.7L672 528.4L663 533.4L653 536.2L572 548.7L557.3 544L545 538.3L531 529.3L522 522.2L513 513.6L504 502.9L496.8 492L488.7 476L484.9 466L480.9 450L479 435L479.1 420L481.8 402L484.9 391L490.9 376L496.8 365L504.8 353L514 342.3L524 332.8L536 323.8L550 315.8L564.1 310L579 305.9Z"/></g><g class="p arm"><path fill="currentColor" fill-rule="evenodd" d="M727.8 379L730.3 379L728.1 385L726.8 392L728.1 403L731.6 411L736 416.3L741.5 421L741 422L600 454.1L595 454.6L590 453.4L585.3 450L582.7 446L581.5 440L582.6 435L585 431L589 427.8Z"/></g><g class="p post"><path fill="currentColor" fill-rule="evenodd" d="M703 239L706 238.8L707.4 240L759.3 359L759 360.1L749 361.6L733 367.3L727 369.3L725.8 368L678.8 244L679 242.1L680 241.7Z"/></g><g class="p saddle"><path fill="currentColor" fill-rule="evenodd" d="M630.8 195L739 202.8L745 206L748.4 210L749.9 215L749 220L747 223.1L743 225.7L727 227.9L649 236.3L642 235.6L637 234.2L631 231.3L624 225.5L618.8 219L616.2 212L616.7 205L619 200.7L624 196.8Z"/></g></g><g class="front"><g class="p frame"><path fill="currentColor" fill-rule="evenodd" d="M1103.9 361L1109 361.5L1112 362.8L1114.3 366L1114.8 369L1113.4 374L1103.2 389L1102.6 390L1103 390.7L1115 388.8L1127 390.5L1140 395L1149 399.7L1155 403.8L1167 414.7L1176.2 427L1182.4 440L1186 452.4L1187.4 466L1186.8 479L1184.2 491L1179.4 503L1172.2 515L1163.6 525L1154 533.4L1143 540.3L1134 544.3L1125 547.3L1115 549.2L1103 549.8L1093 549.2L1083 547.2L1074 544L1066 540.2L1057 534.4L1050.5 529L1041.7 519L1036.9 512L1033.6 506L1029.6 496L1026.7 485L1026.1 478L1025 476.7L891 476.6L825 476.4L815 473.8L806.3 469L801.9 465L768.1 426L768.4 425L778 420L783 415.5L787.4 409L791 399.8L827 439.8L834 444.3L842 447.4L849 448.3L1019 448.1L1024 447.2L1029.9 445L1035 442.1L1040 437.9L1046 430.7L1094 366L1098 362.8ZM1099 417L1086 420.6L1079.8 424L1055.7 459L1054.3 468L1054.6 477L1056.6 486L1060.6 495L1067.9 505L1075 511.4L1083 516.2L1095 520.2L1103 521.2L1113 520.6L1122 518.3L1131 514.3L1139.7 508L1147.3 500L1152.4 492L1156.3 482L1157.9 473L1157.7 462L1155.3 452L1150.1 441L1144 433L1137 426.8L1127 420.8L1118 417.8L1108 416.3Z"/></g><g class="p handle"><path fill="currentColor" fill-rule="evenodd" d="M835.3 151L842 150.1L928 163.9L933.8 166L938.2 170L940.5 175L940.9 180L939.6 185L936.7 189L933.6 191L930 192.2L914 190.8L913.1 192L944.5 305L944.3 306L943 306.5L851 306.5L842 307.8L832 312.9L826.6 318L801.6 358L789 378.7L788 378.9L783.3 372L778 367L773 363.8L765.1 361L764.7 360L799.7 303L803 298.4L807.4 294L814 289.8L822 286.7L888 275.2L904.8 272L906.9 271L898.6 238L885 188L884 186.8L882 186.3L838 179.9L835 179.1L831 177L826.9 172L825.6 168L825.6 163L826.8 159L828.6 156L832 152.7Z"/></g><g class="p box"><path fill="url(#lg-box)" fill-rule="evenodd" d="M845 316L849 315.4L1083 315.5L1089 315.9L1096 318.7L1099.5 322L1103.2 327L1103.9 329L1103.4 338L1100 345.4L1084 364.9L1077.3 375L1074.9 377L1072 382.4L1064.5 391L1058.9 400L1051.9 408L1047.1 416L1040 424.4L1031 434.4L1029 435.8L1025 437.8L1017 439.4L850 439.7L839 437.1L828.6 429L815 412.9L811.3 410L804.6 401L797.8 395L796.8 392L797 383L797.3 381L800.8 374L807 366.3L809.3 361L811.2 359L818 347L824.4 338L827.4 332L832 325L838 319.6Z"/></g><g class="p s1"><path fill="url(#lg-s1)" fill-rule="evenodd" d="M1200.6 218L1206 217.3L1211 217.5L1214.4 220L1215.3 223L1214.7 225L1210.7 230L1197 244.1L1192 246.5L1186 247.8L997 244.5L981 243.8L977.4 243L977.7 242L979 241.6L993 239.3L1123 225.3Z"/></g><g class="p s2"><path fill="url(#lg-s2)" fill-rule="evenodd" d="M1128 260L1132 259.6L1136 260.4L1137.9 263L1137.7 266L1134 270.7L1125 279.8L1120 282.5L1115 283.6L981 279.8L972 279.1L967 278L967 277L968 276.7L976 275L1028 269.3Z"/></g></g><g class="p hinge"><circle cx="759" cy="393.8" r="17.799999999999997" fill="none" stroke="#ff6a00" stroke-width="15.2"/></g></svg></div>
   </div>
-  <div class="photo"><img src="assets/hero.webp" width="1086" height="830" alt="Flip-Cargo E+ 概念圖：前艙載著紙箱與購物袋"></div>
 </section>
 
-<dl class="facts">
-  <div><dd>約 12 kg</dd><dt>目標車重（不含電池）</dt></div>
-  <div><dd>80×60×40</dd><dt>目標折疊尺寸（cm）</dt></div>
-  <div><dd>40–50 km</dd><dt>基礎電池目標續航</dt></div>
-  <div><dd>250 W</dd><dt>輪轂馬達</dt></div>
-  <p class="note">以上皆為設計目標，尚未經樣車實測。</p>
-</dl>
+<section class="reveal" id="product">
+  <div class="reveal-pin">
+    <figure><img decoding="async" src="assets/hero.webp" width="1086" height="830" alt="Flip-Cargo E+ 概念圖：前艙載著紙箱與購物袋"></figure>
+    <div class="reveal-side">
+      <h2>展開，<br>就是一台貨運車。</h2>
+      <dl class="facts">
+        <div><dd>約 12 kg</dd><dt>目標車重（不含電池）</dt></div>
+        <div><dd>80×60×40</dd><dt>目標折疊尺寸（cm）</dt></div>
+        <div><dd>40–50 km</dd><dt>基礎電池目標續航</dt></div>
+        <div><dd>250 W</dd><dt>輪轂馬達</dt></div>
+      </dl>
+      <p class="note">以上皆為設計目標，尚未經樣車實測。</p>
+    </div>
+  </div>
+</section>
 
 <section class="wrap problem">
-  <h2><span class="phrase">能載的車太長，</span><span class="phrase">能折的車</span><span class="phrase">載不了。</span></h2>
-  <div>
+  <h2 data-split><span class="phrase">能載的車太長，</span><span class="phrase">能折的車</span><span class="phrase">載不了。</span></h2>
+  <div class="rv">
     <p>接送孩子、帶毛孩看診、採買，再回家停車，常常是同一趟行程。貨運自行車有空間，卻難停、難搬；折疊車好收，卻多半載不了孩子、寵物和大件物品。</p>
     <p><strong>Flip-Cargo E+ 把兩者放進同一台車：</strong>前艙可以換裝，車長依物品調整，整車可以收折。</p>
   </div>
 </section>
 
-<section class="wrap modes" id="modes">
-  <div class="intro"><h2>一台車，三種型態</h2><p>點選型態，看同一台車如何對應出門、接送與回家。</p></div>
-  <div class="mode-grid">
-    <div class="stage"><img id="stage" src="assets/states.webp" alt="載物型態概念圖"></div>
-    <div class="switch" id="modeSwitch">
-      <button type="button" aria-pressed="true" data-box="38,86,1010" data-alt="載物型態概念圖"><span>載物</span><small>少量採買用短車長，大件物品再加長載物區。</small></button>
-      <button type="button" aria-pressed="false" data-box="22,800,610" data-alt="載童座艙型態概念圖"><span>載童</span><small>前艙換成單人座艙，孩子就在視線前方。</small></button>
-      <button type="button" aria-pressed="false" data-box="628,917,458" data-alt="整車收折型態概念圖"><span>收折</span><small>車架與前艙同步收折，方便進電梯與車廂。</small></button>
+<div class="belts" aria-hidden="true"><div class="belt a"><div><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span><span>一折即行<svg><use href="#mark"/></svg></span><span>載孩子<svg><use href="#mark"/></svg></span><span>載毛孩<svg><use href="#mark"/></svg></span><span>載一週的菜<svg><use href="#mark"/></svg></span></div></div><div class="belt b"><div><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span><span>展開能載<svg><use href="#mark"/></svg></span><span>收折好停<svg><use href="#mark"/></svg></span><span>到站就折<svg><use href="#mark"/></svg></span><span>Flip-Cargo E+<svg><use href="#mark"/></svg></span></div></div></div>
+
+<section class="modes" id="modes">
+  <div class="modes-pin">
+    <div class="mode-text">
+      <h2>一台車，<br>三種型態</h2>
+      <p class="mode-lead">點選型態，看同一台車如何對應出門、接送與回家。</p>
+      <div class="switch" id="modeSwitch">
+        <button type="button" aria-pressed="true" data-box="38,86,1010" data-alt="載物型態概念圖"><span>載物</span><small>少量採買用短車長，大件物品再加長載物區。</small></button>
+        <button type="button" aria-pressed="false" data-box="22,800,610" data-alt="載童座艙型態概念圖"><span>載童</span><small>前艙換成單人座艙，孩子就在視線前方。</small></button>
+        <button type="button" aria-pressed="false" data-box="628,917,458" data-alt="整車收折型態概念圖"><span>收折</span><small>車架與前艙同步收折，方便進電梯與車廂。</small></button>
+      </div>
       <p class="note">產品概念圖。折疊機構與實際比例以樣車為準。</p>
     </div>
+    <div class="stage" id="stageBox"><img decoding="async" id="stage" src="assets/states.webp" alt="載物型態概念圖"></div>
   </div>
 </section>
 
-<section class="wrap" id="cabin">
-  <div class="intro"><h2>前艙裝什麼，由今天決定</h2><p>座艙、寵物艙與載物區共用車把前方的位置。</p></div>
+<section class="wrap cabin" id="cabin">
+  <div class="intro"><h2 data-split><span class="phrase">前艙裝什麼，</span><span class="phrase">由今天決定</span></h2><p class="rv">座艙、寵物艙與載物區共用車把前方的位置。</p></div>
   <div class="cabins">
-    <article><img src="assets/child.webp" alt="兒童座艙概念圖" loading="lazy"><h3>兒童座艙</h3><p>單人座椅鎖固於車架，規劃多點式安全帶、四周護框與腳部擋板。載童功能待安全測試與法規審查。</p></article>
-    <article><img src="assets/pet.webp" alt="柴犬坐在寵物艙內的概念圖" loading="lazy"><h3>寵物艙</h3><p>換上寵物艙，帶毛孩看診、散步或出遊，途中抬眼就能留意牠的狀況。</p></article>
-    <article><img src="assets/cargo.webp" alt="前艙裝滿蔬果、紙箱與背包的概念圖" loading="lazy"><h3>載物區</h3><p>設計載物 20 kg，車長依物品調整。東西有沒有移位、掉落，騎著就看得到。</p></article>
+    <article class="unfold tilt"><div class="shot"><img decoding="async" src="assets/child.webp" alt="兒童座艙概念圖" loading="lazy"></div><h3>兒童座艙</h3><p>單人座椅鎖固於車架，規劃多點式安全帶、四周護框與腳部擋板。載童功能待安全測試與法規審查。</p></article>
+    <article class="unfold tilt"><div class="shot"><img decoding="async" src="assets/pet.webp" alt="柴犬坐在寵物艙內的概念圖" loading="lazy"></div><h3>寵物艙</h3><p>換上寵物艙，帶毛孩看診、散步或出遊，途中抬眼就能留意牠的狀況。</p></article>
+    <article class="unfold tilt"><div class="shot"><img decoding="async" src="assets/cargo.webp" alt="前艙裝滿蔬果、紙箱與背包的概念圖" loading="lazy"></div><h3>載物區</h3><p>設計載物 20 kg，車長依物品調整。東西有沒有移位、掉落，騎著就看得到。</p></article>
   </div>
 </section>
 
-<div class="sight">
-  <img src="assets/ride.webp" alt="騎乘者視角：前艙位於車把正前方" loading="lazy">
-  <p><span class="phrase">不必回頭，</span><span class="phrase">在意的都在眼前。</span></p>
-</div>
+<section class="sight" id="sight">
+  <p><span>不必回頭，</span><span>在意的都在眼前。</span></p>
+  <div class="sight-img"><img decoding="async" src="assets/ride.webp" alt="騎乘者視角：前艙位於車把正前方" loading="lazy"></div>
+</section>
 
-<section class="wrap" id="scenes">
-  <div class="intro"><h2>從早上送上學，到晚上買完菜</h2><p>為都會親子與養寵家庭、微型物流和短程通勤族而設計。照片為情境示意，非本產品。</p></div>
-  <div class="days">
-    <figure class="day wide"><img data-remote src="https://images.unsplash.com/photo-1708923762492-8777a5a2d7c4?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=bottom&amp;q=75" alt="大人牽著孩子走在街巷中" loading="lazy"><figcaption><b>親子接送</b>住家到幼兒園的短程往返。</figcaption></figure>
-    <figure class="day wide"><img data-remote src="https://images.unsplash.com/photo-1784557820673-7e0579e74716?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=focalpoint&amp;fp-y=.46&amp;q=75" alt="柴犬繫著牽繩站在街道上" loading="lazy"><figcaption><b>寵物出行</b>看診、散步，或一起去遠一點的公園。</figcaption></figure>
-    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1678528944816-a82ed4debc22?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="台北市場外停著自行車" loading="lazy"><figcaption><b>家庭採買</b>買多買少，車長跟著調整。</figcaption></figure>
-    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1624137527136-66e631bdaa0e?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;crop=bottom&amp;q=75" alt="等待配送的紙箱" loading="lazy"><figcaption><b>微型物流</b>短程多點配送與固定路線。</figcaption></figure>
-    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1654738051835-a2a0749ef6b3?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="通勤者提著折疊車站在月台" loading="lazy"><figcaption><b>短程通勤</b>騎到車站，折好再進車廂。</figcaption></figure>
+<section class="scenes" id="scenes">
+  <div class="scenes-pin">
+    <div class="intro"><h2><span class="phrase">從早上送上學，</span><span class="phrase">到晚上買完菜</span></h2><p>為都會親子與養寵家庭、微型物流和短程通勤族而設計。照片為情境示意，非本產品。</p></div>
+    <div class="track" id="track">
+    <figure class="day"><img decoding="async" data-remote src="https://images.unsplash.com/photo-1708923762492-8777a5a2d7c4?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=bottom&amp;q=75" alt="大人牽著孩子走在街巷中"><figcaption><b>親子接送</b>住家到幼兒園的短程往返。</figcaption></figure>
+    <figure class="day"><img decoding="async" data-remote src="https://images.unsplash.com/photo-1784557820673-7e0579e74716?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=focalpoint&amp;fp-y=.46&amp;q=75" alt="柴犬繫著牽繩站在街道上"><figcaption><b>寵物出行</b>看診、散步，或一起去遠一點的公園。</figcaption></figure>
+    <figure class="day"><img decoding="async" data-remote src="https://images.unsplash.com/photo-1678528944816-a82ed4debc22?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="台北市場外停著自行車"><figcaption><b>家庭採買</b>買多買少，車長跟著調整。</figcaption></figure>
+    <figure class="day"><img decoding="async" data-remote src="https://images.unsplash.com/photo-1624137527136-66e631bdaa0e?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;crop=bottom&amp;q=75" alt="等待配送的紙箱"><figcaption><b>微型物流</b>短程多點配送與固定路線。</figcaption></figure>
+    <figure class="day"><img decoding="async" data-remote src="https://images.unsplash.com/photo-1654738051835-a2a0749ef6b3?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="通勤者提著折疊車站在月台"><figcaption><b>短程通勤</b>騎到車站，折好再進車廂。</figcaption></figure></div>
+    <div class="track-line" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
 <section class="wrap power" id="power">
-  <div class="intro"><h2><span class="phrase">路多長，</span><span class="phrase">電池就帶多大</span></h2><p>輪轂馬達搭配踏力感測，載物、載童時補上一份力。</p></div>
+  <div class="intro"><h2 data-split><span class="phrase">路多長，</span><span class="phrase">電池就帶多大</span></h2><p class="rv">輪轂馬達搭配踏力感測，載物、載童時補上一份力。</p></div>
   <div class="battery">
+    <div class="dial">
+      <svg class="arc" viewBox="0 0 520 300" aria-hidden="true">
+        <path class="arc-bg" d="M40 280A220 220 0 0 1 480 280"/>
+        <path class="arc-val" id="arc" pathLength="100" d="M40 280A220 220 0 0 1 480 280"/>
+        <g class="rider" id="rider"><g transform="translate(40 280) rotate(-90)"><svg x="-38" y="-57" width="76" height="45"><use href="#mark"/></svg></g></g>
+      </svg>
+      <p class="range"><span id="range">40–50</span><small>km</small></p>
+    </div>
     <div>
       <div class="choice" id="batterySwitch">
         <button type="button" aria-pressed="true" data-range="40–50" data-bar="50" data-detail="36 V／10 Ah，360 Wh。適合接送與採買。續航為設計目標。">基礎 10 Ah</button>
         <button type="button" aria-pressed="false" data-range="80–100" data-bar="100" data-detail="36 V／20 Ah，720 Wh。適合多點配送。續航依相同耗電率推估。">擴充 20 Ah</button>
       </div>
-      <div aria-live="polite">
-        <p class="range"><span id="range">40–50</span><small>km</small></p>
-        <div class="bar" aria-hidden="true"><i id="bar" style="width:50%"></i></div>
-        <p id="detail">36 V／10 Ah，360 Wh。適合接送與採買。續航為設計目標。</p>
-      </div>
-      <p class="note" style="margin-top:12px">續航尚未實測，會受載重、車速、坡度、助力模式與環境影響。</p>
-    </div>
-    <ul>
+      <p class="detail" id="detail" aria-live="polite">36 V／10 Ah，360 Wh。適合接送與採買。續航為設計目標。</p>
+      <ul>
       <li><b>快速更換</b>快拆與定位設計</li>
       <li><b>智慧管理</b>規劃 BMS 充放電保護與異常警示</li>
       <li><b>電池安全</b>固定、溫升控制，依循適用標準</li>
@@ -270,25 +473,29 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
       <li><b>維修紀錄</b>記錄維修與相容配件</li>
       <li><b>退役回收</b>規劃由合作據點收件回收</li>
     </ul>
+      <p class="note">續航尚未實測，會受載重、車速、坡度、助力模式與環境影響。</p>
+    </div>
   </div>
 </section>
 
-<section class="wrap build">
-  <img src="assets/cad.webp" alt="載物、載童、收折三種狀態的 2D 側視概念圖" loading="lazy">
-  <div>
-    <h2><span class="phrase">骨架選用</span> <span class="phrase">6061-T6 鋁合金</span></h2>
-    <p>車架與折疊關節的候選材料：密度約為鋼的三分之一，好加工，可陽極處理，也能回收。</p>
-    <dl class="material">
-      <div><dd>2.70</dd><dt>密度 g/cm³</dt></div>
-      <div><dd>約 276</dd><dt>降伏強度 MPa</dt></div>
-      <div><dd>約 310</dd><dt>抗拉強度 MPa</dt></div>
-    </dl>
-    <p class="note">數值為母材典型值。焊接熱影響區強度會下降，不能套用上述數值，須依接頭與製程另行驗證。</p>
+<section class="blueprint" id="build">
+  <div class="wrap build">
+    <figure class="scan"><img decoding="async" src="assets/cad.webp" alt="載物、載童、收折三種狀態的 2D 側視概念圖" loading="lazy"><i aria-hidden="true"></i></figure>
+    <div>
+      <h2 data-split><span class="phrase">骨架選用</span><span class="phrase">6061-T6 鋁合金</span></h2>
+      <p class="rv">車架與折疊關節的候選材料：密度約為鋼的三分之一，好加工，可陽極處理，也能回收。</p>
+      <dl class="material rv">
+        <div><dd>2.70</dd><dt>密度 g/cm³</dt></div>
+        <div><dd>約 276</dd><dt>降伏強度 MPa</dt></div>
+        <div><dd>約 310</dd><dt>抗拉強度 MPa</dt></div>
+      </dl>
+      <p class="note">數值為母材典型值。焊接熱影響區強度會下降，不能套用上述數值，須依接頭與製程另行驗證。</p>
+    </div>
   </div>
 </section>
 
 <section class="wrap compare">
-  <div class="intro"><h2>和常見車款比一比</h2></div>
+  <div class="intro"><h2 data-split>和常見車款比一比</h2></div>
   <div class="scroll">
     <table>
       <thead><tr><th>項目</th><th>貨運自行車</th><th>折疊自行車</th><th class="ours">Flip-Cargo E+ 設計</th></tr></thead>
@@ -301,9 +508,8 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
     </table>
   </div>
 </section>
-
 <section class="wrap specs" id="specs">
-  <div class="intro"><h2>原型規格</h2><p>全部是設計目標。結構分析尚未完成，性能以樣車實測為準。</p></div>
+  <div class="intro"><h2 data-split>原型規格</h2><p>全部是設計目標。結構分析尚未完成，性能以樣車實測為準。</p></div>
   <div class="spec-grid">
     <table>
       <tr><th>車架材質</th><td>候選 6061-T6 鋁合金</td></tr>
@@ -326,10 +532,9 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
   </div>
   <p class="note">分析時假設騎乘者體重 70 kg，並非承載上限。整車總重上限待驗證。</p>
 </section>
-
 <section class="wrap safety" id="safety">
   <div>
-    <h2><span class="phrase">先通過測試，</span><span class="phrase">才讓孩子坐上來</span></h2>
+    <h2 data-split><span class="phrase">先通過測試，</span><span class="phrase">才讓孩子坐上來</span></h2>
     <p>兒童座艙仍在設計階段。完成安全測試與法規審查前，不視為已驗證的產品功能。</p>
     <div class="law">
       <b>在台灣上路，還須符合</b>
@@ -356,8 +561,9 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
   </table>
 </section>
 
-<section class="wrap road">
-  <div class="intro"><h2>從概念圖到第一批試乘</h2><p>月份自專案啟動起算，實際時程取決於打樣、測試與審驗。</p></div>
+<section class="wrap road" id="road">
+  <div class="intro"><h2 data-split><span class="phrase">從概念圖</span><span class="phrase">到第一批試乘</span></h2><p>月份自專案啟動起算，實際時程取決於打樣、測試與審驗。</p></div>
+  <div class="route" aria-hidden="true"><i></i><svg><use href="#mark"/></svg></div>
   <ol class="steps">
     <li><b>第 1–2 月</b><h3>原型裝配</h3><p>整車 CAD、座艙、鎖固與關節試作</p></li>
     <li><b>第 3–4 月</b><h3>受控測試</h3><p>配重、煞停、收折與續航驗證</p></li>
@@ -367,12 +573,12 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
   <p class="note">結構分析將涵蓋單人騎乘、前艙載物、兒童座艙、煞車與轉彎五種工況。</p>
 </section>
 
-<section class="wrap">
-  <div class="intro"><h2>短短一趟，也算數</h2></div>
+<section class="wrap earth">
+  <div class="intro"><h2 data-split><span class="phrase">短短一趟，</span><span class="phrase">也算數</span></h2></div>
   <div class="green">
-    <article><h3>修得好，用得久</h3><p>電池與耗損零件規劃可更換、可維修、可回收，對應 SDG 12 責任消費與生產。</p></article>
-    <article><h3>讓城市好停一點</h3><p>接送、採買後收折停放，對應 SDG 11 永續城市與社區。</p></article>
-    <article><h3>少發動一次引擎</h3><p>以電輔自行車替代短程燃油旅次，對應 SDG 13 氣候行動。</p></article>
+    <article class="rv"><h3>修得好，用得久</h3><p>電池與耗損零件規劃可更換、可維修、可回收，對應 SDG 12 責任消費與生產。</p></article>
+    <article class="rv"><h3>讓城市好停一點</h3><p>接送、採買後收折停放，對應 SDG 11 永續城市與社區。</p></article>
+    <article class="rv"><h3>少發動一次引擎</h3><p>以電輔自行車替代短程燃油旅次，對應 SDG 13 氣候行動。</p></article>
   </div>
 </section>
 
@@ -382,7 +588,7 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
     <p class="price">NT$49,800</p>
     <p class="note">規劃價格，產品尚未開放販售或預購。</p>
   </div>
-  <div>
+  <div class="rv">
     <p><b>個人：</b>規劃官網預約，於合作車店展示、試乘與維修。</p>
     <p><b>企業：</b>規劃小量配送試營運，驗證車隊租賃。</p>
     <p><b>售後：</b>規劃電池健檢、相容配件與汰換回收。</p>
@@ -391,10 +597,13 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
 </main>
 
 <footer>
+  <div class="lockup" id="endLogo" role="img" aria-label="一折即行"><svg class="logo m" viewBox="455 140 770 455" aria-hidden="true"><g class="p road"><path fill="url(#lg-road)" fill-rule="evenodd" d="M832 528L839 527.4L918 527.5L971 529.5L1003 532.1L1014 532.3L1017 533.3L1042 535.5L1058.1 545L1059.4 546L1059.3 547L1058 547.5L962 546.6L875 547.9L770 552.2L674 559L649 560.8L647 561.5L618 563.8L590 567.5L577 568.2L572 569.7L561 570.2L554 571.6L529 573.9L522 575.5L505 577.6L502 578.6L486 580.3L483 581.3L470 583.3L468.3 583L468.3 582L471 580.6L479 578.5L493 573.3L498 572.5L514 567.7L519 567.2L537 562.4L545 561.5L552 559.3L558 559L561 557.6L566 557.4L584 553.5L590 553.2L595 551.6L606 550.7L609 549.5L630 546.9L635 545.6L645.5 545L649 543.4L660 542.8L665 541.3L686 539.5L689 538.5L697 537.5L710 536.8L715 535.6L726 535L732 533.8L752 532.7L761 531.4L793 529.4Z"/></g><g class="back"><g class="p rear"><path fill="currentColor" fill-rule="evenodd" d="M590.6 304L608 303.3L629 305.8L646 310.7L665 319.8L682 331.6L694 343.3L704.1 356L711.4 368L713.7 373L713 374.2L682 384.3L681 383.8L674.3 373L669.6 367L661 358.3L652.8 352L644 346.6L633 341.6L617 337.4L606 336.2L590 337.3L576 340.5L563 345.9L556 349.7L546 357L536.5 366L530.9 373L525.9 381L518.9 396L514.6 412L513.4 431L513.9 438L516 448.8L520.8 463L525.9 473L532.5 483L539.4 491L549.4 500L566 510.2L577 514.4L590 517.4L600 518.4L611 518L621 516.5L632 513.3L642 509.2L652 503.4L661.8 496L669.8 488L676 480L682.5 469L687.3 457L690.9 444L723 436.2L724 436.1L724.8 437L723.2 451L720.1 464L716.2 475L710.4 487L704.3 497L695 508.7L685 518.7L672 528.4L663 533.4L653 536.2L572 548.7L557.3 544L545 538.3L531 529.3L522 522.2L513 513.6L504 502.9L496.8 492L488.7 476L484.9 466L480.9 450L479 435L479.1 420L481.8 402L484.9 391L490.9 376L496.8 365L504.8 353L514 342.3L524 332.8L536 323.8L550 315.8L564.1 310L579 305.9Z"/></g><g class="p arm"><path fill="currentColor" fill-rule="evenodd" d="M727.8 379L730.3 379L728.1 385L726.8 392L728.1 403L731.6 411L736 416.3L741.5 421L741 422L600 454.1L595 454.6L590 453.4L585.3 450L582.7 446L581.5 440L582.6 435L585 431L589 427.8Z"/></g><g class="p post"><path fill="currentColor" fill-rule="evenodd" d="M703 239L706 238.8L707.4 240L759.3 359L759 360.1L749 361.6L733 367.3L727 369.3L725.8 368L678.8 244L679 242.1L680 241.7Z"/></g><g class="p saddle"><path fill="currentColor" fill-rule="evenodd" d="M630.8 195L739 202.8L745 206L748.4 210L749.9 215L749 220L747 223.1L743 225.7L727 227.9L649 236.3L642 235.6L637 234.2L631 231.3L624 225.5L618.8 219L616.2 212L616.7 205L619 200.7L624 196.8Z"/></g></g><g class="front"><g class="p frame"><path fill="currentColor" fill-rule="evenodd" d="M1103.9 361L1109 361.5L1112 362.8L1114.3 366L1114.8 369L1113.4 374L1103.2 389L1102.6 390L1103 390.7L1115 388.8L1127 390.5L1140 395L1149 399.7L1155 403.8L1167 414.7L1176.2 427L1182.4 440L1186 452.4L1187.4 466L1186.8 479L1184.2 491L1179.4 503L1172.2 515L1163.6 525L1154 533.4L1143 540.3L1134 544.3L1125 547.3L1115 549.2L1103 549.8L1093 549.2L1083 547.2L1074 544L1066 540.2L1057 534.4L1050.5 529L1041.7 519L1036.9 512L1033.6 506L1029.6 496L1026.7 485L1026.1 478L1025 476.7L891 476.6L825 476.4L815 473.8L806.3 469L801.9 465L768.1 426L768.4 425L778 420L783 415.5L787.4 409L791 399.8L827 439.8L834 444.3L842 447.4L849 448.3L1019 448.1L1024 447.2L1029.9 445L1035 442.1L1040 437.9L1046 430.7L1094 366L1098 362.8ZM1099 417L1086 420.6L1079.8 424L1055.7 459L1054.3 468L1054.6 477L1056.6 486L1060.6 495L1067.9 505L1075 511.4L1083 516.2L1095 520.2L1103 521.2L1113 520.6L1122 518.3L1131 514.3L1139.7 508L1147.3 500L1152.4 492L1156.3 482L1157.9 473L1157.7 462L1155.3 452L1150.1 441L1144 433L1137 426.8L1127 420.8L1118 417.8L1108 416.3Z"/></g><g class="p handle"><path fill="currentColor" fill-rule="evenodd" d="M835.3 151L842 150.1L928 163.9L933.8 166L938.2 170L940.5 175L940.9 180L939.6 185L936.7 189L933.6 191L930 192.2L914 190.8L913.1 192L944.5 305L944.3 306L943 306.5L851 306.5L842 307.8L832 312.9L826.6 318L801.6 358L789 378.7L788 378.9L783.3 372L778 367L773 363.8L765.1 361L764.7 360L799.7 303L803 298.4L807.4 294L814 289.8L822 286.7L888 275.2L904.8 272L906.9 271L898.6 238L885 188L884 186.8L882 186.3L838 179.9L835 179.1L831 177L826.9 172L825.6 168L825.6 163L826.8 159L828.6 156L832 152.7Z"/></g><g class="p box"><path fill="url(#lg-box)" fill-rule="evenodd" d="M845 316L849 315.4L1083 315.5L1089 315.9L1096 318.7L1099.5 322L1103.2 327L1103.9 329L1103.4 338L1100 345.4L1084 364.9L1077.3 375L1074.9 377L1072 382.4L1064.5 391L1058.9 400L1051.9 408L1047.1 416L1040 424.4L1031 434.4L1029 435.8L1025 437.8L1017 439.4L850 439.7L839 437.1L828.6 429L815 412.9L811.3 410L804.6 401L797.8 395L796.8 392L797 383L797.3 381L800.8 374L807 366.3L809.3 361L811.2 359L818 347L824.4 338L827.4 332L832 325L838 319.6Z"/></g><g class="p s1"><path fill="url(#lg-s1)" fill-rule="evenodd" d="M1200.6 218L1206 217.3L1211 217.5L1214.4 220L1215.3 223L1214.7 225L1210.7 230L1197 244.1L1192 246.5L1186 247.8L997 244.5L981 243.8L977.4 243L977.7 242L979 241.6L993 239.3L1123 225.3Z"/></g><g class="p s2"><path fill="url(#lg-s2)" fill-rule="evenodd" d="M1128 260L1132 259.6L1136 260.4L1137.9 263L1137.7 266L1134 270.7L1125 279.8L1120 282.5L1115 283.6L981 279.8L972 279.1L967 278L967 277L968 276.7L976 275L1028 269.3Z"/></g></g><g class="p hinge"><circle cx="759" cy="393.8" r="17.799999999999997" fill="none" stroke="#ff6a00" stroke-width="15.2"/></g></svg><svg class="logo w" viewBox="414 597 846 202" aria-hidden="true"><g class="p c1"><path fill="currentColor" fill-rule="evenodd" d="M438.6 681L618 680.8L619.7 682L619.4 685L610.4 711L608 713.2L602 713.6L421 713.4L420.1 712L420.4 711L433 685L435 682.6Z"/></g><g class="p c2"><path fill="currentColor" fill-rule="evenodd" d="M859.2 604L863 603.8L863.7 606L856.4 629L854 631.5L781 641.8L777.6 644L775.8 647L767 676.7L727 686.7L724 687.5L723.8 686L739.8 631L742.5 623L747 618.5L751 617.2ZM681.4 605L684 604.2L693 604.1L718 604.2L719.8 605L713 633.9L714 634.4L726 634.5L726.8 636L719.3 661L718 662.8L716 663.7L706 663.8L704.1 665L696.7 693L697.4 694L700.7 694L701.1 695L693.7 721L693 722.3L689 723.7L687.7 725L679.3 758L671.2 773L665 781.7L659 787.2L651 790.4L644 791.1L615 791.1L606 791.1L605 790.8L604.7 789L614.7 770L617 767.1L621 764.9L631 763L634 761.2L637 757.9L640.2 751L644.3 735L644 733.1L643 733L623 737.1L622 737.1L621.1 736L628.7 711L630 708.6L633 706.6L653.1 702L662.6 666L662 664L661 663.9L642 663.8L640.5 663L640.6 661L649.7 638L651 636.1L655 634.5L671 634L677.7 609L679 606.7ZM821.8 708L824.5 708L824.2 711L805 789.3L804 790.5L802 790.9L768 791.1L765 790.9L764.3 789L781.5 720ZM712.8 722L714 722.1L717 726.4L721.2 730L728 733.2L737 733.9L749 730.5L749.8 732L745.4 743L737.5 756L717.4 787L715 789.4L712 790.6L674 791.1L672 790L704.2 740Z"/><path fill="url(#lg-bar)" fill-rule="evenodd" d="M846 660L852 659.4L855 661L856 663L855.9 670L854.1 678L852.5 682L850.9 692L847.9 696L844 699.4L835 702.5L825 704.2L807 709.8L797.3 712L791 714.5L784 715.6L758 723.2L753 723.3L750 725.6L740 729.8L734 730.5L729 729.7L725.1 728L721.6 726L716 721L716 719L714 716L714.6 705L717.4 698L719.8 695L726 690.6L733 688.7L751 686L756 683.5L766 680.7L768 679.5L775 678.9L790 673.9L795 673.2L800 671.2L806 670.6L808 669.4L814 668.4L834 662.4L838 662.4ZM730 690.9L724 693.6L718.8 699L715.5 707L715.6 713L718.6 720L725 726.2L730 728.3L739 728.4L745.9 725L751.2 719L753.4 712L753.2 706L751.6 701L749.8 698L745 693.3L742 691.6L738 690.4ZM711.7 693L714 692.6L715.5 694L711.7 701L710.2 709L713 717L711 719.4L703 720.1L697 720.6L696 718L696 714L698.6 710L699 703.5L700.8 699L701 696L705 694Z"/><circle cx="734.5" cy="710" r="12.899999999999999" fill="none" stroke="#ff6a00" stroke-width="10.999999999999998"/></g><g class="p c3"><path fill="currentColor" fill-rule="evenodd" d="M893.2 630L898 629L968 629.1L969.7 630L967.1 644L952.5 708L949.3 718L947 720.1L944 721.2L901 721.3L900 721.5L899.2 723L892 754L893 755L913.2 751L913.9 749L912.9 732L915 729.2L924 728.7L938 729.1L939.2 732L941.6 776L941.5 780L940.7 781L938 781.7L918 781.5L916.5 780L916 775L915 773.6L858 786.8L856 786L888.9 641L890.9 633ZM980.7 630L984 629.2L1054 629.1L1055.9 630L1056 631L1031.3 742L1027.1 755L1024.6 759L1020.7 763L1017 765.6L1013 767.1L1007 768.2L984.7 768L984 766L989 747.4L992 744.8L998 743.6L1000.2 742L1001.4 740L1018.8 663L1020.8 654L1020 652.6L1005 652.6L1003.6 654L973.6 789L972 790.6L970 790.9L944 790.7L943.4 789L976.5 639L978 633.1ZM916 650.5L912.9 664L913.5 665L933.5 665L934.6 663L937 650.7L935 650.1ZM909 684.8L907.5 686L904.7 698L905 699.3L925 699.7L926 699.4L926.8 698L929.4 686L929 685Z"/></g><g class="p c4"><path fill="currentColor" fill-rule="evenodd" d="M1106.2 627L1112 626.4L1136.3 627L1136.1 629L1131.5 636L1120 651L1111 660.5L1099.2 670L1101 670.7L1126 670.9L1127.8 672L1127.6 673L1112 695L1109.9 699L1089.6 789L1088 790.6L1086 791L1058 791L1057 790.7L1056.6 789L1071.7 723L1070 722.3L1057 725.1L1053 725.2L1052.9 723L1056.6 709L1059 705.5L1068 700.1L1076 693.9L1087.3 682L1093.7 673L1091 672.8L1066 678.3L1064.7 678L1064.3 676L1068.5 662L1070 659.4L1080 653.2L1087 647.4L1094.4 640L1103.1 629ZM1134.6 678L1147 677.3L1247 677.3L1249 677.5L1250 678.5L1249.1 683L1242 703.1L1239 704.4L1220 704.4L1218.4 705L1206.1 760L1203 770.8L1200 777L1196.3 782L1191.7 786L1185.9 789L1177 790.9L1131 791.1L1129.6 790L1139 770.1L1141 767.5L1146 765.3L1161 764.7L1164.5 763L1167.2 760L1169.3 754L1180.1 706L1180 704.9L1178 704.3L1123.7 704L1123.2 702L1130.6 682L1132 679.7Z"/><path fill="url(#lg-top)" fill-rule="evenodd" d="M1167.5 629L1250 629.6L1251 630.5L1251 632.2L1242.9 649L1240.1 653L1235 655.5L1225 655.7L1140 655.4L1139.1 654L1139.8 652L1147.7 639L1151.6 634L1159 629.6Z"/></g></svg></div>
+  <div class="foot">
   <p class="team"><span class="phrase">大葉大學</span><span class="phrase">機械與自動化工程學系</span><br>隊長　王奕允<br>成員　<span class="phrase">邱譽皓、王丞桓、</span><span class="phrase">陳筱晴、呂育德</span><br>指導教授　曾靖雯老師</p>
   <details>
     <summary>圖片與資料來源</summary>
     <ul>
+      <li>LOGO：團隊提供圖檔，網頁版為向量描繪。</li>
       <li>產品與座艙圖：團隊簡報提供的概念圖，並非實車照片。</li>
       <li>親子接送：<a href="https://unsplash.com/photos/rqvwxRa207w" target="_blank" rel="noopener">David Emrich／Unsplash</a></li>
       <li>寵物出行：<a href="https://unsplash.com/photos/AligXD9UNLQ" target="_blank" rel="noopener">Trương Tuyết Ly／Unsplash</a></li>
@@ -406,41 +615,331 @@ footer details li{margin:4px 0;overflow-wrap:anywhere}
       <li>永續目標：<a href="https://sdgs.un.org/goals" target="_blank" rel="noopener">United Nations SDGs</a></li>
     </ul>
   </details>
+<a class="btn magnet" href="#home">再騎一次</a></div>
 </footer>
 
 <script>
 (() => {
-  // 三態切換：在同一張概念圖上平移、縮放。data-box = 左, 上, 寬（原圖像素），舞台比例 4:3
-  const stage = document.getElementById('stage');
-  const show = button => {
-    const [x, y, w] = button.dataset.box.split(',').map(Number);
-    stage.style.width = 1086 / w * 100 + '%';
-    stage.style.left = -x / w * 100 + '%';
-    stage.style.top = -y / (w * 3 / 4) * 100 + '%';
-    stage.alt = button.dataset.alt;
-  };
-  const group = (id, action) => {
-    const buttons = [...document.querySelectorAll('#' + id + ' button')];
-    buttons.forEach(button => button.addEventListener('click', () => {
-      buttons.forEach(other => other.setAttribute('aria-pressed', other === button));
-      action(button);
-    }));
-  };
-  group('modeSwitch', show);
-  show(document.querySelector('#modeSwitch button'));
+  const root = document.documentElement;
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const ease = v => v * v * (3 - 2 * v);
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const fx = () => root.classList.contains('fx');
+  const pinned = el => fx() && getComputedStyle(el.firstElementChild).position === 'sticky';
+  const through = el => clamp(-el.getBoundingClientRect().top / Math.max(1, el.offsetHeight - innerHeight));
+  const entering = el => { const r = el.getBoundingClientRect(); return clamp((innerHeight - r.top) / (innerHeight + r.height)) };
+  const store = (kind, key, value) => { try { window[kind].setItem(key, value) } catch {} };
 
-  group('batterySwitch', button => {
-    document.getElementById('range').textContent = button.dataset.range;
-    document.getElementById('bar').style.width = button.dataset.bar + '%';
-    document.getElementById('detail').textContent = button.dataset.detail;
+  /* 開場：同一分頁只播一次，點擊、按鍵、滾輪皆可略過 */
+  const hero = $('#hero');
+  const start = () => {
+    if (!root.classList.contains('booting')) return;
+    root.classList.remove('booting');
+    hero.classList.add('play');
+    store('sessionStorage', 'intro', '1');
+  };
+  if (root.classList.contains('booting')) {
+    $('.boot').addEventListener('animationstart', e => { if (e.animationName === 'boot-out') hero.classList.add('play') });
+    $('.boot').addEventListener('animationend', e => { if (e.animationName === 'boot-out') start() });
+    ['pointerdown', 'keydown', 'wheel', 'touchmove'].forEach(t => addEventListener(t, start, {once: true, passive: true}));
+    setTimeout(start, 3600);
+  } else hero.classList.add('play');
+
+  /* 標題拆字 */
+  $$('[data-split]').forEach(h => {
+    h.setAttribute('aria-label', h.textContent.trim());
+    let i = 0;
+    const walk = node => [...node.childNodes].forEach(child => {
+      if (child.nodeType === 1) { child.setAttribute('aria-hidden', 'true'); return walk(child) }
+      if (child.nodeType !== 3 || !child.textContent.trim()) return;
+      const out = document.createDocumentFragment();
+      // 英數詞與後方標點視為一體，避免斷在錯的位置
+      child.textContent.match(/[A-Za-z0-9-]+|\s+|.[，。！？、]?/g).forEach(token => {
+        if (!token.trim()) return out.append(token);
+        const s = document.createElement('span');
+        s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.textContent = token; s.style.setProperty('--i', i++);
+        out.append(s);
+      });
+      child.replaceWith(out);
+    });
+    walk(h);
   });
 
-  // 離線或圖庫連結失效時，保留色塊與說明文字
-  document.querySelectorAll('img[data-remote]').forEach(img => {
+  /* 數字以翻牌方式出現，不顯示中間值，避免規格與定價被誤讀 */
+  const roll = el => {
+    if (fx()) el.animate([{opacity: 0, transform: 'perspective(400px) rotateX(-88deg)'}, {opacity: 1, transform: 'none'}], {duration: 650, easing: 'cubic-bezier(.16,1,.3,1)'});
+  };
+
+  /* 進場 */
+  $$('.cabins,.green').forEach(p => [...p.children].forEach((e, i) => e.style.setProperty('--i', i)));
+  $$('tbody,.spec-grid table').forEach(p => $$('tr', p).forEach((e, i) => e.style.setProperty('--i', i)));
+  const seen = new IntersectionObserver(list => list.forEach(({isIntersecting, target: el}) => {
+    if (!isIntersecting) return;
+    seen.unobserve(el);
+    el.classList.add(el.id === 'endLogo' ? 'play' : 'in');
+    if (el.matches('.price,.material')) roll(el);
+    if (el.matches('.unfold')) setTimeout(() => el.classList.add('ready'), 1500);
+  }), {rootMargin: '0px 0px -6% 0px'});
+  $$('[data-split],.rv,.unfold,.compare table,.spec-grid,.safety table,#endLogo').forEach(el => seen.observe(el));
+  $$('.price,.material').forEach(el => seen.observe(el));
+
+  /* LOGO 收折：前半車繞橘色鉸鏈轉動 */
+  const emblem = $('#emblem'), front = $('.front', emblem), back = $('.back', emblem), foldBtn = $('#foldBtn');
+  let folded = false, manual = 0, scrollFold = 0, manualFrame;
+  const drawFold = () => {
+    const t = clamp(Math.max(manual, scrollFold));
+    front.setAttribute('transform', t ? `translate(759 393.8) rotate(${-18 * t}) scale(${Math.cos(Math.PI * t) * (1 - .22 * t)} ${1 - .22 * t}) translate(-759 -393.8)` : '');
+    back.setAttribute('transform', t ? `rotate(${7 * t} 759 393.8)` : '');
+  };
+  const toggleFold = () => {
+    folded = !folded;
+    foldBtn.setAttribute('aria-pressed', folded);
+    foldBtn.textContent = folded ? '展開 LOGO' : '折一下 LOGO';
+    cancelAnimationFrame(manualFrame);
+    const from = manual, to = folded ? 1 : 0, t0 = performance.now();
+    const tick = now => {
+      const t = fx() ? clamp((now - t0) / 900) : 1;
+      manual = from + (to - from) * ease(t); drawFold();
+      if (t < 1) manualFrame = requestAnimationFrame(tick);
+    };
+    manualFrame = requestAnimationFrame(tick);
+  };
+  foldBtn.addEventListener('click', toggleFold);
+  emblem.addEventListener('click', toggleFold);
+
+  /* 三態：六片摺頁翻面 */
+  const box = $('#stageBox'), stage = $('#stage'), modeButtons = $$('#modeSwitch button');
+  let mode = 0, flips = [];
+  const place = (img, data, i = 0, n = 1) => {
+    const [x, y, w] = data.split(',').map(Number);
+    img.style.width = 1086 / w * 100 * n + '%';
+    img.style.left = -(x / w * n + i) * 100 + '%';
+    img.style.top = -y / (w * .75) * 100 + '%';
+  };
+  const setMode = next => {
+    if (next === mode) return;
+    const from = modeButtons[mode].dataset.box, to = modeButtons[next].dataset.box;
+    mode = next;
+    modeButtons.forEach((b, i) => b.setAttribute('aria-pressed', i === next));
+    stage.alt = modeButtons[next].dataset.alt;
+    flips.forEach(el => el.remove()); flips = [];
+    place(stage, to);
+    if (!fx()) return;
+    stage.style.visibility = 'hidden';
+    const mine = [], done = [];
+    const n = innerWidth < 700 ? 4 : 6;
+    for (let i = 0; i < n; i++) for (const [data, out] of [[to, false], [from, true]]) {
+      const slat = document.createElement('div'), img = new Image(), sign = i % 2 ? 1 : -1;
+      slat.className = 'slat'; slat.setAttribute('aria-hidden', 'true');
+      slat.style.left = i / n * 100 + '%';
+      slat.style.width = `calc(${100 / n}% + 1px)`;
+      slat.style.transformOrigin = i % 2 ? 'left' : 'right';
+      img.alt = ''; img.src = stage.src;
+      place(img, data, i, n);
+      slat.append(img); box.append(slat); mine.push(slat);
+      const flat = {transform: 'rotateY(0deg)', opacity: 1}, turned = {transform: `rotateY(${(out ? sign : -sign) * 90}deg)`, opacity: .35};
+      done.push(slat.animate(out ? [flat, turned] : [turned, flat], {duration: 330, delay: i * 45 + (out ? 0 : 330), easing: out ? 'ease-in' : 'ease-out', fill: 'both'}).finished);
+    }
+    flips = mine;
+    Promise.all(done).then(() => {
+      if (flips !== mine) return;
+      stage.style.visibility = ''; mine.forEach(el => el.remove()); flips = [];
+    }, () => {});
+    setTimeout(() => { if (flips === mine || !flips.length) stage.style.visibility = '' }, 1400);
+  };
+  place(stage, modeButtons[0].dataset.box);
+  const modes = $('#modes');
+  let modeLock = 0;
+  modeButtons.forEach((b, i) => b.addEventListener('click', () => {
+    setMode(i);
+    if (!pinned(modes)) return;
+    modeLock = performance.now() + 900;
+    scrollTo({top: modes.getBoundingClientRect().top + scrollY + (modes.offsetHeight - innerHeight) * [.12, .5, .88][i], behavior: 'smooth'});
+  }));
+
+  /* 電池 */
+  const arc = $('#arc'), rider = $('#rider'), range = $('#range'), batteryButtons = $$('#batterySwitch button');
+  batteryButtons.forEach(b => b.addEventListener('click', () => {
+    batteryButtons.forEach(o => o.setAttribute('aria-pressed', o === b));
+    arc.style.strokeDashoffset = 100 - b.dataset.bar;
+    rider.style.transform = `rotate(${b.dataset.bar * 1.8}deg)`;
+    range.textContent = b.dataset.range;
+    roll(range.parentNode);
+    $('#detail').textContent = b.dataset.detail;
+  }));
+
+  /* 滑鼠互動 */
+  if (fine) {
+    const follow = (el, move, leave) => {
+      el.addEventListener('pointermove', e => { if (fx()) { const r = el.getBoundingClientRect(); move((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height, r) } });
+      el.addEventListener('pointerleave', leave);
+    };
+    $$('.tilt').forEach(el => follow(el, (x, y) => {
+      el.style.setProperty('--ry', (x - .5) * 12 + 'deg'); el.style.setProperty('--rx', (.5 - y) * 10 + 'deg');
+      el.style.setProperty('--mx', x * 100 + '%'); el.style.setProperty('--my', y * 100 + '%');
+    }, () => ['--rx', '--ry'].forEach(v => el.style.removeProperty(v))));
+    $$('.magnet').forEach(el => follow(el, (x, y) => { el.style.translate = `${(x - .5) * 14}px ${(y - .5) * 10}px` }, () => { el.style.translate = '' }));
+    follow(hero.firstElementChild, (x, y) => {
+      emblem.style.setProperty('--ry', (x - .5) * 22 + 'deg'); emblem.style.setProperty('--rx', (.5 - y) * 14 + 'deg');
+    }, () => ['--rx', '--ry'].forEach(v => emblem.style.removeProperty(v)));
+  }
+
+  /* 捲動連動 */
+  const top = $('.top'), reveal = $('#product'), photo = $('figure', reveal), facts = $$('.facts>div');
+  const scenes = $('#scenes'), track = $('#track'), sight = $('#sight'), sightLines = $$('p span', sight);
+  const scan = $('.scan'), road = $('#road'), route = $('.route'), steps = $$('.steps li');
+  const navLinks = $$('#nav a'), navTargets = navLinks.map(a => $(a.hash));
+  let travel = 0, queued = false;
+
+  const update = () => {
+    queued = false;
+    const on = fx(), vh = innerHeight, max = root.scrollHeight - vh;
+    top.style.setProperty('--p', max > 0 ? clamp(scrollY / max) : 0);
+
+    scrollFold = pinned(hero) ? ease(clamp((through(hero) - .08) / .72)) : 0;
+    drawFold();
+
+    if (pinned(reveal)) {
+      // 前段在進場時就開始展開，避免出現整片空白
+      const r = reveal.getBoundingClientRect();
+      const p = ease(clamp((vh * .75 - r.top) / (vh * 1.05)));
+      photo.style.setProperty('--a', 82 * (1 - p) + '%');
+      photo.style.setProperty('--b', 100 - 82 * (1 - p) + '%');
+      photo.style.setProperty('--z', 1 + .22 * (1 - p));
+    } else ['--a', '--b', '--z'].forEach(v => photo.style.removeProperty(v));
+    const rp = pinned(reveal) ? through(reveal) : 1;
+    facts.forEach((el, i) => {
+      const off = on && rp < .08 + i * .13, dd = el.firstElementChild;
+      el.classList.toggle('off', off);
+      if (!off && !dd.dataset.done && el.getBoundingClientRect().top < vh) { dd.dataset.done = 1; roll(dd) }
+    });
+
+    if (pinned(modes) && performance.now() > modeLock) {
+      const r = modes.getBoundingClientRect();
+      if (r.top <= 0 && r.bottom >= 0) setMode(Math.min(2, Math.floor(through(modes) * 3)));
+    }
+
+    if (travel) {
+      const t = through(scenes);
+      track.style.transform = `translateX(${-travel * t}px)`;
+      scenes.style.setProperty('--t', t);
+    }
+
+    const s = clamp(entering(sight) * 2.2);
+    sightLines.forEach((el, i) => el.style.setProperty('--x', on ? (i ? 1 : -1) * 40 * (1 - ease(s)) + 'vw' : '0'));
+
+    const cad = scan.getBoundingClientRect();
+    const c = on ? clamp((vh * .95 - cad.top) / (vh * .6)) : 1;
+    scan.style.setProperty('--scan', c * 100 + '%');
+    scan.style.setProperty('--on', c > 0 && c < 1 ? 1 : 0);
+
+    const rr = route.getBoundingClientRect();
+    const r = on ? clamp((vh * .9 - rr.top) / (vh * .55)) : 1;
+    road.style.setProperty('--r', r);
+    steps.forEach((el, i) => el.classList.toggle('off', on && r < i / 4));
+
+    let current = -1;
+    navTargets.forEach((el, i) => { if (el.getBoundingClientRect().top < vh * .4) current = i });
+    navLinks.forEach((a, i) => i === current ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
+  };
+  const request = () => { if (!queued) { queued = true; requestAnimationFrame(update) } };
+
+  const layout = () => {
+    scenes.classList.remove('pinned');
+    scenes.style.height = track.style.transform = '';
+    travel = 0;
+    if (fx() && innerWidth > 860 && innerHeight >= 640) {
+      scenes.classList.add('pinned');
+      track.scrollLeft = 0;
+      travel = Math.max(0, track.scrollWidth - root.clientWidth);
+      if (travel) scenes.style.height = innerHeight + travel + 'px';
+      else scenes.classList.remove('pinned');
+    }
+    update();
+  };
+
+  /* 速度線與跑馬帶：離開畫面即暫停 */
+  const canvas = $('#speed'), ctx = canvas.getContext('2d'), belts = $('.belts'), tapes = $$('.belt>div');
+  const live = new Map([[canvas, true], [belts, false]]);
+  let streaks = [], cw = 0, ch = 0, lastY = scrollY, boost = 0, offset = 0, loopId = 0, last = 0, half = 0;
+  const size = () => {
+    cw = hero.clientWidth; ch = hero.firstElementChild.clientHeight;
+    const d = Math.min(devicePixelRatio || 1, 1.5);
+    canvas.width = cw * d; canvas.height = ch * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    streaks = Array.from({length: cw < 700 ? 28 : 70}, () => ({x: Math.random() * cw, y: Math.random() * ch, z: .2 + Math.random() * .8}));
+    half = tapes[0].scrollWidth / 2;
+  };
+  const loop = now => {
+    loopId = 0;
+    if (!fx() || document.hidden) return;
+    const dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
+    const y = scrollY;
+    boost = Math.max(boost * Math.exp(-4 * dt), Math.min(12, Math.abs(y - lastY) / 8)); lastY = y;
+    if (live.get(canvas)) {
+      ctx.clearRect(0, 0, cw, ch);
+      for (const s of streaks) {
+        const v = s.z * (190 + boost * 110), len = 25 + s.z * (100 + boost * 22);
+        s.x -= v * dt;
+        if (s.x + len < 0) { s.x = cw + Math.random() * 200; s.y = Math.random() * ch }
+        ctx.globalAlpha = s.z * .3;
+        ctx.fillStyle = s.z > .7 ? '#ff6a00' : '#cdb9a9';
+        ctx.beginPath(); ctx.moveTo(s.x, s.y - s.z * 2); ctx.lineTo(s.x + len, s.y); ctx.lineTo(s.x, s.y + s.z * 2); ctx.fill();
+      }
+    }
+    if (live.get(belts) && half) {
+      offset = (offset + dt * (55 + boost * 55)) % half;
+      tapes[0].style.transform = `translateX(${-offset}px)`;
+      tapes[1].style.transform = `translateX(${offset - half}px)`;
+    }
+    if (live.get(canvas) || live.get(belts)) loopId = requestAnimationFrame(loop);
+  };
+  const run = () => { if (!loopId && fx()) { last = 0; loopId = requestAnimationFrame(loop) } };
+  const visible = new IntersectionObserver(list => { list.forEach(e => live.set(e.target, e.isIntersecting)); run() });
+  visible.observe(canvas); visible.observe(belts);
+  document.addEventListener('visibilitychange', run);
+
+  /* 選單與特效開關 */
+  const menu = $('#menu'), nav = $('#nav');
+  const openMenu = open => { nav.classList.toggle('open', open); menu.setAttribute('aria-expanded', open) };
+  menu.addEventListener('click', () => openMenu(menu.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', () => openMenu(false));
+  addEventListener('keydown', e => { if (e.key === 'Escape') openMenu(false) });
+
+  const fxSwitch = $('#fxSwitch');
+  fxSwitch.setAttribute('aria-pressed', fx());
+  fxSwitch.addEventListener('click', () => {
+    // 版面高度會變，先記住目前所在區塊
+    const here = $$('main>section,main>.belts,body>footer').find(el => el.getBoundingClientRect().bottom > innerHeight * .4);
+    const on = !fx();
+    root.classList.toggle('fx', on);
+    root.classList.remove('booting');
+    fxSwitch.setAttribute('aria-pressed', on);
+    store('localStorage', 'fx', on ? 'on' : 'off');
+    if (!on) {
+      flips.forEach(el => el.remove()); flips = []; stage.style.visibility = '';
+    }
+    layout();
+    if (here) scrollTo({top: scrollY + here.getBoundingClientRect().top, behavior: 'instant'});
+    size(); run();
+  });
+
+  $$('img[data-remote]').forEach(img => {
     const fail = () => img.classList.add('failed');
     img.addEventListener('error', fail);
     if (img.complete && !img.naturalWidth && img.currentSrc) fail();
   });
+
+  let width = innerWidth, height = innerHeight;
+  addEventListener('scroll', request, {passive: true});
+  addEventListener('resize', () => {
+    // 手機網址列伸縮只改高度，不重建速度線
+    if (innerWidth !== width || Math.abs(innerHeight - height) > 140) { width = innerWidth; height = innerHeight; size() }
+    layout();
+  });
+  addEventListener('load', () => { size(); layout() });
+  size(); layout(); run();
 })();
 </script>
 </body>
