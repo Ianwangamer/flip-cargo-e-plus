@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta name="description" content="Flip-Cargo E+ 折疊電輔貨運自行車：載童、載寵物、載物，到站收折。大葉大學機械與自動化工程學系產品概念。">
+<title>Flip-Cargo E+｜一折即行</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --cream:#fff6e8; --blush:#eadcd2; --sand:#d8c3a9; --rust:#a23b08; --cocoa:#642704; --ink:#2b211c; --muted:#69594e;
+  --kai:"DFKai-SB","標楷體","BiauKai","Kaiti TC",serif;
+  --sans:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
+  --gut:max(20px,calc((100vw - 1200px)/2));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px;background:var(--cream)}
+body{margin:0;color:var(--ink);font:17px/1.75 var(--sans);line-break:strict}
+img{display:block;max-width:100%}
+a{color:inherit;text-underline-offset:4px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+h1,h2,h3,p,figure,dl,dd{margin:0}
+h1,h2,h3{font-family:var(--kai);font-weight:400;text-wrap:balance}
+h2{font-size:clamp(34px,4.4vw,60px);line-height:1.25}
+h3{font-size:28px;line-height:1.4}
+.phrase{display:inline-block}
+.wrap{padding:96px var(--gut)}
+.intro{display:flex;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:40px;flex-wrap:wrap}
+.intro p{max-width:34em;color:var(--muted)}
+.note{font-size:14px;line-height:1.65;color:var(--muted)}
+
+.top{position:sticky;top:0;z-index:5;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--gut);background:var(--cream)}
+.brand{font-weight:700;text-decoration:none;white-space:nowrap}
+.top nav{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;font-size:15px}
+.top nav a{text-decoration:none;padding:10px 0}
+.top nav a:hover{color:var(--rust)}
+
+.hero{position:relative;height:min(780px,calc(100svh - 64px));min-height:540px;display:grid;grid-template-columns:40% 60%;grid-template-rows:minmax(0,1fr);background:var(--cocoa);color:var(--cream);overflow:hidden}
+.hero .copy{align-self:center;padding:32px 32px 32px var(--gut)}
+.hero h1{font-size:clamp(76px,9.6vw,150px);line-height:1.08}
+.hero .name{font-size:22px;font-weight:700;margin-bottom:20px}
+.hero .lead{font-family:var(--kai);font-size:clamp(21px,2vw,30px);line-height:1.55;margin:24px 0 28px}
+.hero .photo{min-height:0}
+.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:60% 78%}
+.cta{display:inline-block;padding:11px 26px;background:var(--cream);color:var(--cocoa);text-decoration:none;font-weight:700}
+.hero small{display:block;margin-top:22px;font-size:13px;color:var(--sand)}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:30px var(--gut);background:var(--blush)}
+.facts dd{font:38px/1.2 var(--kai);white-space:nowrap}
+.facts dt{font-size:14px;color:var(--muted)}
+.facts p{grid-column:1/-1}
+
+.problem{display:grid;grid-template-columns:1.1fr 1fr;gap:40px 72px;align-items:center}
+.problem p+p{margin-top:18px}
+.problem strong{color:var(--rust)}
+
+.modes{background:var(--blush)}
+.mode-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:center}
+.stage{position:relative;aspect-ratio:4/3;overflow:hidden}
+.stage img{position:absolute;max-width:none;transition:width .9s ease,left .9s ease,top .9s ease}
+.switch button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #bda48f;background:none;padding:20px 12px}
+.switch button span{display:block;font:30px/1.4 var(--kai)}
+.switch button small{font-size:15px;color:var(--muted)}
+.switch button[aria-pressed=true]{background:var(--cocoa);color:var(--cream)}
+.switch button[aria-pressed=true] small{color:var(--sand)}
+.switch .note{padding:14px 12px 0}
+
+.cabins{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cabins img{width:100%;aspect-ratio:1;object-fit:cover}
+.cabins h3{margin:16px 0 4px}
+.sight{position:relative}
+.sight img{width:100%;min-height:190px;object-fit:cover}
+.sight p{padding:26px var(--gut);background:var(--ink);color:var(--cream);font:clamp(24px,2.8vw,38px)/1.45 var(--kai);text-align:center}
+
+.days{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.day{position:relative;grid-column:span 2;height:350px;overflow:hidden;background:var(--cocoa);color:#fff}
+.day.wide{grid-column:span 3}
+.day img{width:100%;height:100%;object-fit:cover}
+.day img.failed{visibility:hidden}
+.day figcaption{position:absolute;left:0;right:0;bottom:0;padding:12px 18px 15px;background:rgb(43 33 28/.86);font-size:15px;line-height:1.55}
+.day b{display:block;font:400 27px/1.4 var(--kai)}
+
+.power{background:var(--cocoa);color:var(--cream)}
+.power .intro p,.power .note{color:var(--sand)}
+.battery{display:grid;grid-template-columns:1fr 1fr;gap:48px 72px}
+.choice{display:flex;gap:10px;flex-wrap:wrap}
+.choice button{border:1px solid var(--sand);background:none;color:var(--cream);padding:9px 20px}
+.choice button[aria-pressed=true]{background:var(--cream);color:var(--cocoa)}
+.range{font:clamp(70px,8vw,120px)/1.1 var(--kai);margin:26px 0 8px;white-space:nowrap}
+.range small{font-size:.35em;margin-left:10px}
+.bar{height:22px;background:#82451f;margin:16px 0 8px}
+.bar i{display:block;height:100%;background:var(--sand);transition:width .6s ease}
+.battery li{padding:11px 0;border-bottom:1px solid #82451f}
+.battery ul{list-style:none;margin:0;padding:0}
+.battery li{display:grid;grid-template-columns:6em minmax(0,1fr)}
+
+.build{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;align-items:center}
+.build p{margin-top:18px}
+.material{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 10px}
+.material dd{font:30px/1.3 var(--kai);color:var(--rust)}
+.material dt{font-size:14px}
+
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--sand)}
+th{font-weight:700}
+.scroll{overflow-x:auto;position:relative}
+.compare table{min-width:680px}
+.compare .ours{background:var(--blush);color:var(--cocoa);font-weight:700}
+.compare{padding-top:0}
+.specs{background:var(--blush)}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;align-items:start}
+.spec-grid th{width:38%}
+.spec-grid th,.spec-grid td{border-color:#c5ad99}
+.specs .note{margin-top:18px}
+
+.safety{display:grid;grid-template-columns:1fr 1.35fr;gap:40px 72px}
+.safety h2+p{margin-top:20px}
+.law{margin-top:26px;padding:22px 24px;background:var(--blush);font-size:15px}
+.law ul{margin:8px 0;padding-left:20px}
+
+.road{background:var(--ink);color:var(--cream)}
+.road .intro p,.road .note{color:var(--sand)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:0;margin:0 0 28px}
+.steps b{display:block;color:var(--sand);padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--muted)}
+.steps h3{margin-bottom:4px}
+
+.green{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.green h3{color:var(--rust);margin-bottom:8px}
+.offer{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;background:var(--blush);align-items:center}
+.price{font:clamp(54px,6vw,92px)/1.2 var(--kai);color:var(--cocoa);white-space:nowrap}
+footer{padding:48px var(--gut);background:var(--cocoa);color:var(--cream);font-size:14px}
+footer .team{font:24px/1.7 var(--kai);margin-bottom:20px}
+footer summary{cursor:pointer}
+footer details li{margin:4px 0;overflow-wrap:anywhere}
+
+@media(max-width:820px){
+  body{font-size:16px}
+  .wrap{padding-top:64px;padding-bottom:64px}
+  .compare{padding-top:0}
+  .top{gap:12px}.top nav{gap:12px;font-size:14px}
+  .brand{font-size:15px}
+  .compare table{min-width:0;font-size:13px}
+  .compare th,.compare td{padding:10px 5px}
+  .compare tr>:first-child{white-space:nowrap}
+  .hero{display:flex;flex-direction:column;height:auto;min-height:0}
+  .hero .photo{aspect-ratio:1086/830;flex:none}
+  .hero .copy{order:2;align-self:stretch;padding:26px 20px 36px}
+  .hero .name{margin-bottom:10px}
+  .hero .lead{margin:14px 0 22px}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts dd{font-size:30px}
+  .problem,.mode-grid,.battery,.build,.spec-grid,.safety,.offer,.green{grid-template-columns:minmax(0,1fr)}
+  .cabins{grid-template-columns:1fr}
+  .days{display:block}
+  .day{height:300px;margin-bottom:16px}
+  .steps{grid-template-columns:1fr 1fr}
+  .material dd{font-size:23px}
+  .safety th,.safety td{padding:10px 6px;font-size:14px}
+}
+@media(min-width:821px) and (max-height:760px){
+  .hero .copy{padding-top:16px;padding-bottom:16px}
+  .hero h1{font-size:min(8vw,106px)}
+  .hero .name{margin-bottom:8px}
+  .hero .lead{margin:14px 0 18px;font-size:22px}
+  .hero small{margin-top:12px}
+  .hero .photo img{object-position:60% 88%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.top{position:static}.hero{height:560px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#home">Flip-Cargo E+</a>
+  <nav aria-label="主選單">
+    <a href="#modes">型態</a><a href="#scenes">情境</a><a href="#power">電池</a><a href="#specs">規格</a><a href="#safety">安全</a>
+  </nav>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="copy">
+    <p class="name">Flip-Cargo E+</p>
+    <h1>一折<br>即行</h1>
+    <p class="lead"><span class="phrase">載孩子、載毛孩、</span><span class="phrase">載一週的菜，</span><span class="phrase">到了就折起來。</span></p>
+    <a class="cta" href="#modes">看它怎麼變形</a>
+    <small>折疊電輔貨運自行車・開發中的產品概念</small>
+  </div>
+  <div class="photo"><img src="assets/hero.webp" width="1086" height="830" alt="Flip-Cargo E+ 概念圖：前艙載著紙箱與購物袋"></div>
+</section>
+
+<dl class="facts">
+  <div><dd>約 12 kg</dd><dt>目標車重（不含電池）</dt></div>
+  <div><dd>80×60×40</dd><dt>目標折疊尺寸（cm）</dt></div>
+  <div><dd>40–50 km</dd><dt>基礎電池目標續航</dt></div>
+  <div><dd>250 W</dd><dt>輪轂馬達</dt></div>
+  <p class="note">以上皆為設計目標，尚未經樣車實測。</p>
+</dl>
+
+<section class="wrap problem">
+  <h2><span class="phrase">能載的車太長，</span><span class="phrase">能折的車</span><span class="phrase">載不了。</span></h2>
+  <div>
+    <p>接送孩子、帶毛孩看診、採買，再回家停車，常常是同一趟行程。貨運自行車有空間，卻難停、難搬；折疊車好收，卻多半載不了孩子、寵物和大件物品。</p>
+    <p><strong>Flip-Cargo E+ 把兩者放進同一台車：</strong>前艙可以換裝，車長依物品調整，整車可以收折。</p>
+  </div>
+</section>
+
+<section class="wrap modes" id="modes">
+  <div class="intro"><h2>一台車，三種型態</h2><p>點選型態，看同一台車如何對應出門、接送與回家。</p></div>
+  <div class="mode-grid">
+    <div class="stage"><img id="stage" src="assets/states.webp" alt="載物型態概念圖"></div>
+    <div class="switch" id="modeSwitch">
+      <button type="button" aria-pressed="true" data-box="38,86,1010" data-alt="載物型態概念圖"><span>載物</span><small>少量採買用短車長，大件物品再加長載物區。</small></button>
+      <button type="button" aria-pressed="false" data-box="22,800,610" data-alt="載童座艙型態概念圖"><span>載童</span><small>前艙換成單人座艙，孩子就在視線前方。</small></button>
+      <button type="button" aria-pressed="false" data-box="628,917,458" data-alt="整車收折型態概念圖"><span>收折</span><small>車架與前艙同步收折，方便進電梯與車廂。</small></button>
+      <p class="note">產品概念圖。折疊機構與實際比例以樣車為準。</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="cabin">
+  <div class="intro"><h2>前艙裝什麼，由今天決定</h2><p>座艙、寵物艙與載物區共用車把前方的位置。</p></div>
+  <div class="cabins">
+    <article><img src="assets/child.webp" alt="兒童座艙概念圖" loading="lazy"><h3>兒童座艙</h3><p>單人座椅鎖固於車架，規劃多點式安全帶、四周護框與腳部擋板。載童功能待安全測試與法規審查。</p></article>
+    <article><img src="assets/pet.webp" alt="柴犬坐在寵物艙內的概念圖" loading="lazy"><h3>寵物艙</h3><p>換上寵物艙，帶毛孩看診、散步或出遊，途中抬眼就能留意牠的狀況。</p></article>
+    <article><img src="assets/cargo.webp" alt="前艙裝滿蔬果、紙箱與背包的概念圖" loading="lazy"><h3>載物區</h3><p>設計載物 20 kg，車長依物品調整。東西有沒有移位、掉落，騎著就看得到。</p></article>
+  </div>
+</section>
+
+<div class="sight">
+  <img src="assets/ride.webp" alt="騎乘者視角：前艙位於車把正前方" loading="lazy">
+  <p><span class="phrase">不必回頭，</span><span class="phrase">在意的都在眼前。</span></p>
+</div>
+
+<section class="wrap" id="scenes">
+  <div class="intro"><h2>從早上送上學，到晚上買完菜</h2><p>為都會親子與養寵家庭、微型物流和短程通勤族而設計。照片為情境示意，非本產品。</p></div>
+  <div class="days">
+    <figure class="day wide"><img data-remote src="https://images.unsplash.com/photo-1708923762492-8777a5a2d7c4?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=bottom&amp;q=75" alt="大人牽著孩子走在街巷中" loading="lazy"><figcaption><b>親子接送</b>住家到幼兒園的短程往返。</figcaption></figure>
+    <figure class="day wide"><img data-remote src="https://images.unsplash.com/photo-1784557820673-7e0579e74716?auto=format&amp;fit=crop&amp;w=1100&amp;h=700&amp;crop=focalpoint&amp;fp-y=.46&amp;q=75" alt="柴犬繫著牽繩站在街道上" loading="lazy"><figcaption><b>寵物出行</b>看診、散步，或一起去遠一點的公園。</figcaption></figure>
+    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1678528944816-a82ed4debc22?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="台北市場外停著自行車" loading="lazy"><figcaption><b>家庭採買</b>買多買少，車長跟著調整。</figcaption></figure>
+    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1624137527136-66e631bdaa0e?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;crop=bottom&amp;q=75" alt="等待配送的紙箱" loading="lazy"><figcaption><b>微型物流</b>短程多點配送與固定路線。</figcaption></figure>
+    <figure class="day"><img data-remote src="https://images.unsplash.com/photo-1654738051835-a2a0749ef6b3?auto=format&amp;fit=crop&amp;w=800&amp;h=700&amp;q=75" alt="通勤者提著折疊車站在月台" loading="lazy"><figcaption><b>短程通勤</b>騎到車站，折好再進車廂。</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap power" id="power">
+  <div class="intro"><h2><span class="phrase">路多長，</span><span class="phrase">電池就帶多大</span></h2><p>輪轂馬達搭配踏力感測，載物、載童時補上一份力。</p></div>
+  <div class="battery">
+    <div>
+      <div class="choice" id="batterySwitch">
+        <button type="button" aria-pressed="true" data-range="40–50" data-bar="50" data-detail="36 V／10 Ah，360 Wh。適合接送與採買。續航為設計目標。">基礎 10 Ah</button>
+        <button type="button" aria-pressed="false" data-range="80–100" data-bar="100" data-detail="36 V／20 Ah，720 Wh。適合多點配送。續航依相同耗電率推估。">擴充 20 Ah</button>
+      </div>
+      <div aria-live="polite">
+        <p class="range"><span id="range">40–50</span><small>km</small></p>
+        <div class="bar" aria-hidden="true"><i id="bar" style="width:50%"></i></div>
+        <p id="detail">36 V／10 Ah，360 Wh。適合接送與採買。續航為設計目標。</p>
+      </div>
+      <p class="note" style="margin-top:12px">續航尚未實測，會受載重、車速、坡度、助力模式與環境影響。</p>
+    </div>
+    <ul>
+      <li><b>快速更換</b>快拆與定位設計</li>
+      <li><b>智慧管理</b>規劃 BMS 充放電保護與異常警示</li>
+      <li><b>電池安全</b>固定、溫升控制，依循適用標準</li>
+      <li><b>定期健檢</b>檢查固定、充放電與接頭狀態</li>
+      <li><b>維修紀錄</b>記錄維修與相容配件</li>
+      <li><b>退役回收</b>規劃由合作據點收件回收</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap build">
+  <img src="assets/cad.webp" alt="載物、載童、收折三種狀態的 2D 側視概念圖" loading="lazy">
+  <div>
+    <h2><span class="phrase">骨架選用</span> <span class="phrase">6061-T6 鋁合金</span></h2>
+    <p>車架與折疊關節的候選材料：密度約為鋼的三分之一，好加工，可陽極處理，也能回收。</p>
+    <dl class="material">
+      <div><dd>2.70</dd><dt>密度 g/cm³</dt></div>
+      <div><dd>約 276</dd><dt>降伏強度 MPa</dt></div>
+      <div><dd>約 310</dd><dt>抗拉強度 MPa</dt></div>
+    </dl>
+    <p class="note">數值為母材典型值。焊接熱影響區強度會下降，不能套用上述數值，須依接頭與製程另行驗證。</p>
+  </div>
+</section>
+
+<section class="wrap compare">
+  <div class="intro"><h2>和常見車款比一比</h2></div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>項目</th><th>貨運自行車</th><th>折疊自行車</th><th class="ours">Flip-Cargo E+ 設計</th></tr></thead>
+      <tbody>
+        <tr><th>載童</th><td>前艙可加裝座椅</td><td>多無載童配置</td><td class="ours">前艙切換座艙（待驗證）</td></tr>
+        <tr><th>載物</th><td>大容量固定前艙</td><td>小型前袋或後架</td><td class="ours">前艙載物，車長可調</td></tr>
+        <tr><th>停放</th><td>車身長，占空間</td><td>可進電梯與車廂</td><td class="ours">車架與前艙同步收折</td></tr>
+        <tr><th>電輔</th><td>多數配備</td><td>多為人力</td><td class="ours">250 W 輪轂馬達</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap specs" id="specs">
+  <div class="intro"><h2>原型規格</h2><p>全部是設計目標。結構分析尚未完成，性能以樣車實測為準。</p></div>
+  <div class="spec-grid">
+    <table>
+      <tr><th>車架材質</th><td>候選 6061-T6 鋁合金</td></tr>
+      <tr><th>整車重量</th><td>約 12 kg（不含電池）</td></tr>
+      <tr><th>展開尺寸</th><td>約 160 × 70 × 100 cm</td></tr>
+      <tr><th>折疊尺寸</th><td>約 80 × 60 × 40 cm</td></tr>
+      <tr><th>前艙載物</th><td>20 kg</td></tr>
+      <tr><th>輪胎</th><td>20 吋 × 2.0 吋</td></tr>
+      <tr><th>煞車</th><td>前後雙碟煞</td></tr>
+    </table>
+    <table>
+      <tr><th>馬達</th><td>250 W 輪轂馬達</td></tr>
+      <tr><th>最高時速</th><td>25 km/h</td></tr>
+      <tr><th>變速</th><td>7 段</td></tr>
+      <tr><th>基礎電池</th><td>36 V／10 Ah<span class="phrase">（360 Wh）</span></td></tr>
+      <tr><th>擴充電池</th><td>36 V／20 Ah<span class="phrase">（720 Wh）</span></td></tr>
+      <tr><th>續航</th><td>基礎 40–50 km，擴充推估 80–100 km</td></tr>
+      <tr><th>充電時間</th><td>4–6 小時</td></tr>
+    </table>
+  </div>
+  <p class="note">分析時假設騎乘者體重 70 kg，並非承載上限。整車總重上限待驗證。</p>
+</section>
+
+<section class="wrap safety" id="safety">
+  <div>
+    <h2><span class="phrase">先通過測試，</span><span class="phrase">才讓孩子坐上來</span></h2>
+    <p>兒童座艙仍在設計階段。完成安全測試與法規審查前，不視為已驗證的產品功能。</p>
+    <div class="law">
+      <b>在台灣上路，還須符合</b>
+      <ul>
+        <li>駕駛年滿 18 歲，限附載一名幼童。</li>
+        <li>前座椅限 1–4 歲且 15 kg 以下。</li>
+        <li>車輛與兒童座椅皆須取得合格標章。</li>
+        <li>自行車載物不得超過 20 kg，長度不得伸出前輪，寬度不得超過車把手。</li>
+      </ul>
+      <a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&amp;flno=122" target="_blank" rel="noopener">道路交通安全規則第 122 條</a>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>項目</th><th>設計方向</th><th>驗證方式</th></tr></thead>
+    <tbody>
+      <tr><th>座椅固定</th><td>鎖固於艙底板與車架</td><td>拉拔與疲勞測試</td></tr>
+      <tr><th>安全帶</th><td>多點式，肩帶可調</td><td>錨點強度測試</td></tr>
+      <tr><th>前艙防護</th><td>四周護框與緩衝</td><td>擠壓與撞擊測試</td></tr>
+      <tr><th>腳部隔離</th><td>擋板與踏位隔開前輪</td><td>尺寸與實車檢查</td></tr>
+      <tr><th>煞車前傾</th><td>低置座艙、限制前衝</td><td>配重煞停測試</td></tr>
+      <tr><th>轉彎側翻</th><td>重心靠近中心線</td><td>配重轉彎測試</td></tr>
+      <tr><th>年齡體重</th><td>依法規訂定上限</td><td>法規查核</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="wrap road">
+  <div class="intro"><h2>從概念圖到第一批試乘</h2><p>月份自專案啟動起算，實際時程取決於打樣、測試與審驗。</p></div>
+  <ol class="steps">
+    <li><b>第 1–2 月</b><h3>原型裝配</h3><p>整車 CAD、座艙、鎖固與關節試作</p></li>
+    <li><b>第 3–4 月</b><h3>受控測試</h3><p>配重、煞停、收折與續航驗證</p></li>
+    <li><b>第 5–6 月</b><h3>小批試產</h3><p>依審驗結果進入小批製造</p></li>
+    <li><b>第 7 月起</b><h3>市場驗證</h3><p>合作車店展示、試乘與維修</p></li>
+  </ol>
+  <p class="note">結構分析將涵蓋單人騎乘、前艙載物、兒童座艙、煞車與轉彎五種工況。</p>
+</section>
+
+<section class="wrap">
+  <div class="intro"><h2>短短一趟，也算數</h2></div>
+  <div class="green">
+    <article><h3>修得好，用得久</h3><p>電池與耗損零件規劃可更換、可維修、可回收，對應 SDG 12 責任消費與生產。</p></article>
+    <article><h3>讓城市好停一點</h3><p>接送、採買後收折停放，對應 SDG 11 永續城市與社區。</p></article>
+    <article><h3>少發動一次引擎</h3><p>以電輔自行車替代短程燃油旅次，對應 SDG 13 氣候行動。</p></article>
+  </div>
+</section>
+
+<section class="wrap offer">
+  <div>
+    <h2>基礎版測試定價</h2>
+    <p class="price">NT$49,800</p>
+    <p class="note">規劃價格，產品尚未開放販售或預購。</p>
+  </div>
+  <div>
+    <p><b>個人：</b>規劃官網預約，於合作車店展示、試乘與維修。</p>
+    <p><b>企業：</b>規劃小量配送試營運，驗證車隊租賃。</p>
+    <p><b>售後：</b>規劃電池健檢、相容配件與汰換回收。</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="team"><span class="phrase">大葉大學</span><span class="phrase">機械與自動化工程學系</span><br>隊長　王奕允<br>成員　<span class="phrase">邱譽皓、王丞桓、</span><span class="phrase">陳筱晴、呂育德</span><br>指導教授　曾靖雯老師</p>
+  <details>
+    <summary>圖片與資料來源</summary>
+    <ul>
+      <li>產品與座艙圖：團隊簡報提供的概念圖，並非實車照片。</li>
+      <li>親子接送：<a href="https://unsplash.com/photos/rqvwxRa207w" target="_blank" rel="noopener">David Emrich／Unsplash</a></li>
+      <li>寵物出行：<a href="https://unsplash.com/photos/AligXD9UNLQ" target="_blank" rel="noopener">Trương Tuyết Ly／Unsplash</a></li>
+      <li>家庭採買：<a href="https://unsplash.com/photos/HxOb2ngSH94" target="_blank" rel="noopener">Huy Phan／Unsplash</a></li>
+      <li>微型物流：<a href="https://unsplash.com/photos/DevJkLB3hWE" target="_blank" rel="noopener">Kadarius Seegars／Unsplash</a></li>
+      <li>短程通勤：<a href="https://unsplash.com/photos/kkE5Cj9BXn4" target="_blank" rel="noopener">Honbike／Unsplash</a></li>
+      <li>照片授權：<a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash License</a></li>
+      <li>材料典型值：<a href="https://asm.matweb.com/search/SpecificMaterial.asp?bassnum=MA6061T6" target="_blank" rel="noopener">ASM／MatWeb 6061-T6</a></li>
+      <li>永續目標：<a href="https://sdgs.un.org/goals" target="_blank" rel="noopener">United Nations SDGs</a></li>
+    </ul>
+  </details>
+</footer>
+
+<script>
+(() => {
+  // 三態切換：在同一張概念圖上平移、縮放。data-box = 左, 上, 寬（原圖像素），舞台比例 4:3
+  const stage = document.getElementById('stage');
+  const show = button => {
+    const [x, y, w] = button.dataset.box.split(',').map(Number);
+    stage.style.width = 1086 / w * 100 + '%';
+    stage.style.left = -x / w * 100 + '%';
+    stage.style.top = -y / (w * 3 / 4) * 100 + '%';
+    stage.alt = button.dataset.alt;
+  };
+  const group = (id, action) => {
+    const buttons = [...document.querySelectorAll('#' + id + ' button')];
+    buttons.forEach(button => button.addEventListener('click', () => {
+      buttons.forEach(other => other.setAttribute('aria-pressed', other === button));
+      action(button);
+    }));
+  };
+  group('modeSwitch', show);
+  show(document.querySelector('#modeSwitch button'));
+
+  group('batterySwitch', button => {
+    document.getElementById('range').textContent = button.dataset.range;
+    document.getElementById('bar').style.width = button.dataset.bar + '%';
+    document.getElementById('detail').textContent = button.dataset.detail;
+  });
+
+  // 離線或圖庫連結失效時，保留色塊與說明文字
+  document.querySelectorAll('img[data-remote]').forEach(img => {
+    const fail = () => img.classList.add('failed');
+    img.addEventListener('error', fail);
+    if (img.complete && !img.naturalWidth && img.currentSrc) fail();
+  });
+})();
+</script>
+</body>
+</html>
