@@ -1,0 +1,57 @@
+{
+ "圖：一層層堆疊成形示意": {
+  "file": "additive_fdm_printing.jpg",
+  "credit": "© HRostamani｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:3D_Printing_an_Object_using_FDM_Printer.jpg"
+ },
+ "圖：CNC 切削加工示意": {
+  "file": "cnc_milling.jpg",
+  "credit": "© Impressionmanufacturer｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:CNC_milling_machine.jpg"
+ },
+ "圖：FDM 噴嘴擠出示意": {
+  "file": "fdm_schematic.png",
+  "credit": "© Paolo Cignoni｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:Schematic_representation_of_Fused_Filament_Fabrication_01.png",
+  "fit": "contain"
+ },
+ "圖：依病患影像印出的手術模擬模型": {
+  "file": "medical_liver_model.jpg",
+  "credit": "© Jan Witowski｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:3D_printed_liver_model_-_tumor.jpg"
+ },
+ "圖：產線治具／夾具實例": {
+  "file": "manufacturing_router_adaptor.jpg",
+  "credit": "© David English｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:3D_printed_router_template_adaptor.jpg"
+ },
+ "圖：文創／客製商品實例": {
+  "file": "consumer_orange_vase.jpg",
+  "credit": "© GrinningIodize｜CC BY-SA 4.0｜Wikimedia Commons",
+  "focus": [
+   0.4,
+   0.5
+  ],
+  "source": "https://commons.wikimedia.org/wiki/File:Orange_3D-printed_vase_with_wilted_flower.jpg"
+ }
+}

@@ -154,6 +154,17 @@ def placeholder(slide, page, x, y, w, h, label, size=18):
                    radius=0.08, text=label, size=size, color=MUTED)
     from PIL import Image
     iw, ih = Image.open(img["path"]).size
+    if img.get("fit") == "contain":   # 示意圖：完整顯示不裁切，置中
+        sc = min(w / iw, (h - 0.34) / ih)
+        pw_, ph_ = iw * sc, ih * sc
+        pic = slide.shapes.add_picture(img["path"], Inches(x + (w - pw_) / 2), Inches(y + (h - 0.34 - ph_) / 2),
+                                       Inches(pw_), Inches(ph_))
+        pic.name = "圖片：" + label.replace("\n", "")
+        USED_IMAGES.append((page, label.replace("\n", ""), img["credit"]))
+        cap = tb(slide, x, y + h - 0.34, w, 0.34, img["credit"], size=11, color=MUTED, align=PP_ALIGN.RIGHT,
+                 anchor=MSO_ANCHOR.MIDDLE)
+        cap.name = "圖片出處"
+        return [pic, cap]
     pic = slide.shapes.add_picture(img["path"], Inches(x), Inches(y), Inches(w), Inches(h))
     # 等比例裁切填滿框（cover），focus 0~1 決定保留畫面的位置
     fx, fy = img.get("focus", [0.5, 0.5])
