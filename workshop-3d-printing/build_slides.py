@@ -129,10 +129,58 @@ def box(slide, x, y, w, h, fill=CARD, line=None, radius=0.12, shape=MSO_SHAPE.RO
     return s
 
 
+def _load_images():
+    """images/credits.json：{ 預留框說明: {file, credit, focus} }，有檔案就放圖、沒有就畫虛線框"""
+    import json
+    here = os.path.dirname(os.path.abspath(__file__))
+    fp = os.path.join(here, "images", "credits.json")
+    if not os.path.exists(fp):
+        return {}
+    data = json.load(open(fp, encoding="utf-8"))
+    for v in data.values():
+        v["path"] = os.path.join(here, "images", v["file"])
+    return {k: v for k, v in data.items() if os.path.exists(v["path"])}
+
+
+IMAGES = _load_images()
+USED_IMAGES = []       # (頁碼, 說明, 出處)
+
+
 def placeholder(slide, page, x, y, w, h, label, size=18):
-    PLACEHOLDERS.append((page, label))
-    return box(slide, x, y, w, h, fill=RGBColor(0x27, 0x33, 0x3F), line=GRAY, dash=True,
-               radius=0.08, text=label, size=size, color=MUTED)
+    img = IMAGES.get(label)
+    if img is None:
+        PLACEHOLDERS.append((page, label))
+        return box(slide, x, y, w, h, fill=RGBColor(0x27, 0x33, 0x3F), line=GRAY, dash=True,
+                   radius=0.08, text=label, size=size, color=MUTED)
+    from PIL import Image
+    iw, ih = Image.open(img["path"]).size
+    pic = slide.shapes.add_picture(img["path"], Inches(x), Inches(y), Inches(w), Inches(h))
+    # 等比例裁切填滿框（cover），focus 0~1 決定保留畫面的位置
+    fx, fy = img.get("focus", [0.5, 0.5])
+    ra, rb = iw / ih, w / h
+    if ra > rb:   # 圖比較寬：裁左右
+        keep = rb / ra
+        pic.crop_left = (1 - keep) * fx
+        pic.crop_right = (1 - keep) * (1 - fx)
+    else:         # 圖比較高：裁上下
+        keep = ra / rb
+        pic.crop_top = (1 - keep) * fy
+        pic.crop_bottom = (1 - keep) * (1 - fy)
+    pic.name = "圖片：" + label.replace("\n", "")
+    USED_IMAGES.append((page, label.replace("\n", ""), img["credit"]))
+    cap = box(slide, x, y + h - 0.34, w, 0.34, fill=RGBColor(0x11, 0x18, 0x1F), radius=0.0,
+              shape=MSO_SHAPE.RECTANGLE, text=img["credit"], size=11, color=MUTED,
+              align=PP_ALIGN.RIGHT)
+    _set_alpha(cap, 35)
+    cap.name = "圖片出處"
+    return [pic, cap]
+
+
+def _set_alpha(shape, transparency_pct):
+    sf = shape.fill._xPr.find(f"{{{A}}}solidFill")
+    clr = sf[0]
+    a = etree.SubElement(clr, f"{{{A}}}alpha")
+    a.set("val", str(int((100 - transparency_pct) * 1000)))
 
 
 # ---------------------------------------------------------------- 動畫引擎
@@ -155,7 +203,7 @@ class Anim:
             shapes = [shapes]
         for s in shapes:
             self.groups[-1].append(dict(start=int(start), kind=kind, spid=s.shape_id, dur=int(dur), **kw))
-            if kind in ("wipe", "fade", "pulse"):
+            if kind in ("wipe", "fade", "pulse") and s._element.tag.endswith("}sp"):
                 self.built.add(s.shape_id)
 
     def wipe(self, shapes, start, dur=500, frm="left"):
@@ -623,7 +671,7 @@ def build(out):
         if i < 3:
             da = down_arrow(s, 0.98, y + 0.96, 0.3, 0.23)
             an.wipe(da, t - 100, 200, "top")
-    ph = placeholder(s, n, 7.3, 1.55, 5.4, 4.6, "圖：FDM 噴嘴擠出示意\n（自行拍攝）", size=20)
+    ph = placeholder(s, n, 7.3, 1.55, 5.4, 4.6, "圖：FDM 噴嘴擠出示意", size=20)
     an.wipe(ph, 600, 800, "bottom")
     mini_printer(s, an, 200)
     notes(s, """
@@ -1124,6 +1172,9 @@ if __name__ == "__main__":
     out = a.out if os.path.isabs(a.out) else os.path.join(here, a.out)
     total = build(out)
     print(f"已輸出 {out}，共 {total} 頁")
-    print("圖片預留框：")
+    print("已放入的網路圖片：")
+    for p_, lab, cr in USED_IMAGES:
+        print(f"  第 {p_} 頁：{lab}　｜{cr}")
+    print("仍是預留框：")
     for p_, lab in PLACEHOLDERS:
         print(f"  第 {p_} 頁：{lab.replace(chr(10), '')}")
